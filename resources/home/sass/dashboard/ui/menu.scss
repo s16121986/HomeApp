@@ -1,0 +1,17 @@
+
+nav.main-menu {display: flex;background-color: #fff;box-shadow: $shadow-popup;border-radius: 12px 12px 0 0;position: fixed;bottom: 0;left: 0;width: 100%;height: 48px;}
+nav.main-menu div {flex-grow: 1;height: 100%;padding: 16px;cursor: pointer;text-align: center;position: relative;}
+nav.main-menu div svg {width: 16px;height: 16px;color: #676767;}
+nav.main-menu div img {width: 16px;height: 16px;}
+nav.main-menu button {position: relative;width: 48px;height: 48px;border-radius: 50%;background-color: #fff;padding: 8px;}
+nav.main-menu button .wrap {background-color: $color-error;border-radius: 50%;width: 32px;height: 32px;padding: 8px;}
+nav.main-menu button svg {width: 16px;height: 16px;fill: #fff;}
+
+nav.main-menu div.current:after {content: "";display: block;position: absolute;top: 36px;left: 50%;width: 32px;height: 2px;border-radius: 1px;margin-left: -16px;background-color: $color-main;}
+nav.main-menu div.current svg {color: $color-main;}
+
+div.settings-menu {position: fixed;right: 8px;bottom: 56px;background-color: #fff;box-shadow: $shadow-popup;border-radius: 4px;padding: 8px 0;}
+div.settings-menu .separator {height: 1px; margin: 8px 16px;background: $color-border;}
+div.settings-menu a {display: flex;padding: 0 16px;line-height: 32px;white-space: nowrap;color: $color-text;}
+div.settings-menu a:hover {background: $color-background-alt;text-decoration: none;}
+div.settings-menu svg {width: 16px;height: 32px;margin-right: 8px;fill: #999;}

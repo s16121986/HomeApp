@@ -1,0 +1,20 @@
+
+.ui-btn {display: inline-block;width: 16px;height: 16px;background-size: 14px 14px;cursor: pointer;background-repeat: no-repeat;background-position: 50% 50%;opacity: .8;}
+.ui-btn:hover {opacity: 1;}
+.btn-edit {background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M10.6469 0.292893C10.6546 0.30067 10.6623 0.308544 10.6697 0.316509L13.6415 3.34813L13.6469 3.35344C14.0374 3.74396 14.0374 4.37713 13.6469 4.76765L5.76767 12.6468C5.557 12.8575 5.27572 13.0166 5.00001 13H2.00001C1.44773 13 1.00001 12.5523 1.00001 12V9C0.964376 8.70547 1.12741 8.39813 1.35345 8.17208L9.23265 0.292893C9.62317 -0.0976311 10.2563 -0.0976311 10.6469 0.292893ZM3.00001 9.35395V11H4.58609L11.5324 4.05364L9.93249 2.42147L3.00001 9.35395Z' fill='%2363C74D'/%3E%3C/svg%3E%0A");}
+.btn-settings {background-image: url("/images/icon/settings.svg");}
+.btn-refresh {background-image: url("/images/ui/reload.svg");}
+
+.btn-submit {border-radius: 3px;background: $color-submit;color: #ffffff;border: none;padding: 0 16px;transition: background 0.3s ease;}
+.btn-cancel {border-radius: 3px;background: $color-cancel;color: #ffffff;border: none;padding: 0 16px;}
+.btn-delete {border-radius: 3px;background: $color-cancel;color: #ffffff;border: none;padding: 0 16px;transition: background 0.3s ease;}
+.btn-submit:hover,
+.btn-cancel:hover,
+.btn-delete:hover {box-shadow: $shadow-hover;}
+
+.btn-close {width: 24px;height: 24px;cursor: pointer;opacity: .8;}
+.btn-close:hover {opacity: 1;}
+.btn-close:before,
+.btn-close:after {content: "";display: block;position: absolute;height: 1px;background: #000000;top: 50%;width: 12px;left: 5px;}
+.btn-close:before {transform: rotate(-45deg);}
+.btn-close:after {transform: rotate(45deg);}

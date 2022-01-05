@@ -1,0 +1,8 @@
+div.shadow {position: fixed;top: 0;left: 0;width: 100%;min-width: 320px;height: 100%;z-index: 50;background: rgba(0, 0, 0, 0.701961);overflow: auto;}
+
+.ui-switch {background: $color-background; text-align: left; transition: padding-left ease .2s;cursor: pointer;box-shadow: inset -1px 2px 4px rgb(0 0 0 / 20%);}
+.ui-switch:before {content: ""; display: inline-block; border-radius: 50%; background: $color-main; vertical-align: top; box-shadow: 0px 1px 4px rgb(0 0 0 / 40%);}
+.control.active .ui-switch,
+.widget.active .ui-switch {background-color: $color-main;}
+.control.active .ui-switch:before,
+.widget.active .ui-switch:before {background: #fff;}

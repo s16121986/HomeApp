@@ -1,0 +1,24 @@
+/* PAGINATOR */
+nav.paginator {margin-top: 20px;}
+
+nav.paginator ul {list-style: none;margin: 0;padding: 0;}
+
+nav.paginator li {display: inline-block;line-height: 25px;height: 25px;text-align: center;}
+
+nav.paginator li.first,
+nav.paginator li.last,
+nav.paginator li.page {}
+
+nav.paginator li.dot {padding: 0 10px;}
+
+nav.paginator li.disabled {color: #999;padding: 0 5px;}
+
+nav.paginator li.current {background: #003C53;color: #fff;padding: 0 5px;min-width: 25px;}
+
+nav.paginator a {display: block;padding: 0 5px;text-decoration: none;min-width: 25px;color: #003C53;}
+
+nav.paginator a:hover {color: #4b666f}
+
+nav.paginator li.count {float: right;color: #999999;}
+
+/* /PAGINATOR */

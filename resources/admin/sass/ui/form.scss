@@ -1,0 +1,20 @@
+.required-label {color: $color-error;}
+
+form.edit-form {}
+form.edit-form label {width: 150px;margin-right: 16px;display: inline-block;line-height: 16px;padding: 8px 0;}
+form.edit-form div.form-field {display: flex;}
+form.edit-form div.form-field:not(:last-child) {margin-bottom: 8px;}
+form.edit-form select,
+form.edit-form input[type="text"] {height: 32px;border-radius: 2px;border: 1px solid $color-border;padding: 0 8px;flex-grow: 1;}
+form.edit-form input[type="checkbox"] {margin-top: 8px;margin-left: 8px;}
+form.edit-form select:not(:last-child) {margin-right: 16px;}
+
+form.edit-form .field-channel select {width: 64px;flex-grow: 0;}
+
+div.form-buttons {margin-top: 32px;padding: 16px 8px 0 8px;border-top: 1px solid $color-border;display: flex;}
+div.form-buttons > * {height: 32px;vertical-align: top;}
+div.form-buttons > *:not(:last-child) {margin-right: 16px;}
+div.form-buttons > a {line-height: 32px;display: inline-block;}
+div.form-buttons > a:hover {text-decoration: none;}
+div.form-buttons .spacer {flex-grow: 1;}
+div.form-buttons .btn-delete {}

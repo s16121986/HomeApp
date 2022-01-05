@@ -1,0 +1,72 @@
+$openSansPath: "#{$fontsPath}/OpenSans/OpenSans";
+
+@font-face {
+	font-family: "Open Sans";
+	font-display: swap;
+	src: local("Open Sans Light"), local("OpenSans-Light"), url("#{$openSansPath}-Light.ttf") format("truetype");
+	font-weight: 300;
+	font-style: normal;
+}
+@font-face {
+	font-family: "Open Sans";
+	font-display: swap;
+	src: local("Open Sans Light Italic"), local("OpenSans-LightItalic"), url("#{$openSansPath}-LightItalic.ttf") format("truetype");
+	font-weight: 300;
+	font-style: italic;
+}
+@font-face {
+	font-family: "Open Sans";
+	font-display: swap;
+	src: local("Open Sans"), local("OpenSans-Regular"), url("#{$openSansPath}-Regular.ttf") format("truetype");
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family: "Open Sans";
+	font-display: swap;
+	src: local("Open Sans Italic"), local("OpenSans-RegularItalic"), url("#{$openSansPath}-RegularItalic.ttf") format("truetype");
+	font-weight: 400;
+	font-style: italic;
+}
+@font-face {
+	font-family: "Open Sans";
+	font-display: swap;
+	src: local("Open Sans Semibold"), local("OpenSans-SemiBold"), url("#{$openSansPath}-SemiBold.ttf") format("truetype");
+	font-weight: 600;
+	font-style: normal;
+}
+@font-face {
+	font-family: "Open Sans";
+	font-display: swap;
+	src: local("Open Sans Semibold Italic"), local("OpenSans-SemiBoldItalic"), url("#{$openSansPath}-SemiBoldItalic.ttf") format("truetype");
+	font-weight: 600;
+	font-style: italic;
+}
+@font-face {
+	font-family: "Open Sans";
+	font-display: swap;
+	src: local("Open Sans Bold"), local("OpenSans-Bold"), url("#{$openSansPath}-Bold.ttf") format("truetype");
+	font-weight: 700;
+	font-style: normal;
+}
+@font-face {
+	font-family: "Open Sans";
+	font-display: swap;
+	src: local("Open Sans Bold Italic"), local("OpenSans-BoldItalic"), url("#{$openSansPath}-Bold.ttf") format("truetype");
+	font-weight: 700;
+	font-style: italic;
+}
+@font-face {
+	font-family: "Open Sans";
+	font-display: swap;
+	src: local("Open Sans Extrabold"), local("OpenSans-ExtraBold"), url("#{$openSansPath}-ExtraBold.ttf") format("truetype");
+	font-weight: 800;
+	font-style: normal;
+}
+@font-face {
+	font-family: "Open Sans";
+	font-display: swap;
+	src: local("Open Sans Extrabold Italic"), local("OpenSans-ExtraBoldItalic"), url("#{$openSansPath}-ExtraBoldItalic.ttf") format("truetype");
+	font-weight: 800;
+	font-style: italic;
+}

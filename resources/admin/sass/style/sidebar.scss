@@ -1,0 +1,13 @@
+div.sidebar-menu {position: fixed;top: 32px;left: 0;background: $color-gray-dark;box-shadow: $shadow;border-radius: 0 8px 8px 0;z-index: 50;width: 48px;}
+div.sidebar-menu a {display: block;padding: 16px;color: #ffffff;background-size: 24px 24px;background-repeat: no-repeat;background-position: 50% 50%;width: 48px;height: 48px;border-radius: 0 8px 8px 0;}
+div.sidebar-menu a.selected,
+div.sidebar-menu a:hover {background-color: $color-background-alt;}
+
+div.sidebar-menu a.home {background-image: url("/images/icon/home.svg");}
+div.sidebar-menu a.settings {background-image: url("/images/icon/settings.svg");}
+div.sidebar-menu a.modules {background-image: url("/images/icon/router-device.svg");}
+div.sidebar-menu a.devices {background-image: url("/images/icon/device.svg");}
+div.sidebar-menu a.scenarios {background-image: url("/images/icon/candles.svg");}
+div.sidebar-menu a.commands {background-image: url("/images/icon/coding.svg");}
+div.sidebar-menu a.stats {background-image: url("/images/icon/pie-chart.svg");}
+div.sidebar-menu a.debug {background-image: url("/images/icon/debugging.svg");}

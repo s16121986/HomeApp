@@ -1,0 +1,21 @@
+@import "buttons";
+@import "loader";
+@import "window";
+@import "form";
+@import "grid";
+@import "paginator";
+@import "social";
+@import "popup";
+
+.ui-rating {white-space: nowrap;}
+.ui-rating > div {background-repeat: no-repeat; background-size: contain; width: 12px; height: 16px; background-position: 0 50%;display: inline-block;vertical-align: top;}
+.ui-rating > div:not(:last-child) {margin-right: 4px;}
+.ui-rating > div.empty {background-image: url("#{$imagesPath}/ui/star-empty.svg");}
+.ui-rating > div.star {background-image: url("#{$imagesPath}/ui/star.svg");}
+
+.ui-toggle-content {}
+.ui-toggle-content > .toggle-title {line-height: 20px;cursor: pointer;}
+.ui-toggle-content > .toggle-title span {display: inline-block;border-bottom: 1px dashed $color-text;}
+.ui-toggle-content > .toggle-title:hover span {border-color: transparent;}
+.ui-toggle-content > .toggle-body {margin-top: 8px;}
+.ui-toggle-content.collapsed > .toggle-body {display: none;}

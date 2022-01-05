@@ -1,0 +1,19 @@
+div.window {position: absolute;top: 50%;left: 50%;z-index: 99;background: #fff;box-shadow: rgba(0, 0, 0, 0.247059) 0px 3px 8px 0px;color: #000;min-width: 320px;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;transform: translateX(-50%) translateY(-50%);}
+
+div.window div.window-title {position: relative;line-height: 22px;padding: 16px 48px;font-size: 16px;line-height: 24px;text-align: center;background: #FAFAFA;font-weight: bold;letter-spacing: .2px;border-radius: 4px 4px 0 0;height: 56px;}
+div.window div.window-body {padding: 32px;position: relative;min-height: 64px;}
+div.window div.btn-close {position: absolute;top: 16px;right: 16px;z-index: 11;font-size: 20px;width: 24px;line-height: 24px;}
+div.window.loading {min-height: 184px;}
+div.window.loading:after {min-height: 184px;background-position: 50% calc(28px + 50%);}
+
+div.window div.form-buttons {margin-top: 16px;display: flex;justify-content: center;}
+div.window div.form-buttons button {height: 32px;min-width: 96px;}
+div.window div.form-buttons button:not(:last-child) {margin-right: 16px;}
+
+div.window div.window-buttons {margin-top: 16px;display: flex;justify-content: center;padding-bottom: 16px;}
+div.window div.window-buttons button {height: 32px;min-width: 96px;}
+div.window div.window-buttons button:not(:last-child) {margin-right: 16px;}
+
+@media screen and (max-width: 480px) {
+	div.window {border-radius: 0; top: 0; left: 0; height: 100%; width: 100%; transform: none;}
+}

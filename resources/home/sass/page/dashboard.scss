@@ -1,0 +1,51 @@
+@import "~core.main";
+@import "../variables";
+
+body {font-size: 13px;color: $color-text;min-width: 320px;}
+body, input, textarea, select, button {font-family: "Open sans", sans-serif;font-weight: 300;}
+
+.unselectable {-moz-user-select: -moz-none;-khtml-user-select: none;-webkit-user-select: none;-o-user-select: none;user-select: none;}
+
+.loading {position: relative;min-height: 60px;}
+button.loading {min-height: 0;}
+.loading:after {content: "";display: block;text-align: center;position: absolute;top: 0;left: 0;width: 100%;height: 100%;z-index: 10;background: rgba(255, 255, 255, .4) url("/images/preload.svg") 50% 50% no-repeat;background-size: 48px 48px;}
+body.loading:after {position: fixed;}
+
+div.app-dashboard {display: flex;flex-direction: column;height: 100%;padding-bottom: 48px;}
+
+header {height: 32px;line-height: 16px;display: flex;padding: 0 16px;background-color: #F9F9F9;}
+header .widget-time {padding: 8px 0;}
+header button {height: 32px;width: 32px;padding: 8px;}
+header button svg {width: 16px;height: 16px;vertical-align: top;}
+
+.widgets-group {margin-bottom: 8px;}
+.widgets-group > .group-title {font-weight: 500;letter-spacing: 1px;font-size: 12px;padding: 0 8px;color: $color-text-alt;}
+.widgets-group > .group-body {display: flex;}
+.widgets-group .widget {padding: 8px;}
+
+@media only screen and (max-width: 550px) {
+}
+@media only screen and (max-width: 450px) {
+}
+
+.widget {}
+.widget-wrap {display: flex;flex-direction: column;position: relative;border-radius: 8px;padding: 8px;min-height: 96px;min-width: 96px;box-shadow: $shadow;cursor: pointer;height: 100%;background-color: #fff;}
+.widget-body {position: relative;flex-grow: 1;z-index: 2;display: flex;}
+.widget .ui-switch {border-radius: 8px;width: 32px;height: 16px; padding: 3px;position: absolute;top: 0;right: 0;}
+.widget .ui-switch:before {width: 10px; height: 10px;}
+.widget.active .ui-switch {padding-left: 18px;}
+
+@import "../dashboard/ui/menu";
+@import "../dashboard/ui/ui";
+@import "../dashboard/ui/window";
+@import "../dashboard/ui/sidebar";
+@import "../dashboard/control/slider";
+@import "../dashboard/activity/home";
+@import "../dashboard/activity/room";
+@import "../dashboard/widget/room";
+@import "../dashboard/widget/device";
+@import "../dashboard/widget/time";
+
+div.activities-wrap {flex-grow: 1;}
+.activity {height: 100%;}
+

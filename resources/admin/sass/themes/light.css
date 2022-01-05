@@ -1,0 +1,32 @@
+
+body.theme-light{background:#EFEFEF;}
+
+body.theme-light{
+	--hints:#D0D3D8;
+	--text:#242424;
+	--text-alt:#82858D;
+
+	--main-alt:#A3D1FF;
+	--air-alt:#A3D1FF;
+	--water-alt:#9DEBFE;
+	--devices-alt:#D4FCB2;
+	--fans-alt:#B0DDE7;
+	--lights-alt:#99F5E7;
+	--others-alt:#DFE19C;
+}
+
+div.activity-page div.page-inner,
+body.theme-light div.ui-command{background:#ffffff;}
+div.activity-page .page-title{border-bottom:1px solid #F3F6FB;}
+
+body.theme-light div.dashboard-rooms{background:#ffffff;}
+
+body.theme-light div.widget-main div.widget-weather,
+body.theme-light div.widget-main .btn{background:#ffffff;}
+
+body.theme-light div.dashboard div.ui-button div.icon{background:#ffffff;}
+body.theme-light div.dashboard div.ui-button:hover{color:#000000;}
+body.theme-light div.dashboard div.ui-button:hover svg{}
+
+/*body.theme-light div.dashboard div.ui-button{background:#ffffff;box-shadow:var(--shadow);}
+body.theme-light div.dashboard div.ui-button:hover{color:var(--text);}*/

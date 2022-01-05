@@ -1,0 +1,16 @@
+
+.widget-device {background-size: cover;background-repeat: no-repeat;}
+.widget-device .image {position: absolute;top: 0;left: 0;width: 32px;height: 32px;z-index: 1;border-radius: 50%;overflow: hidden;}
+/*.widget-device > .image:before {content: "";display: block;position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);z-index: 1;border-radius: 8px;}*/
+.widget-device .image i {font-size: 32px;color: #8E98AD;}
+
+.widget-device {}
+.widget-device div.icon {width: 32px;height: 32px;}
+.widget-device div.icon svg {width: 100%;height: 100%;}
+.widget-device div.state {position: absolute;top: 0;right: 0;width: 16px;height: 16px;}
+.widget-device div.state svg {fill: $color-disabled;}
+.widget-device div.name { font-weight: 500; letter-spacing: 0.4px; transition: color 0.3s ease; position: absolute;bottom: 0;left: 0;color: $color-text;font-size: 11px;line-height: 12px;width: 100%;}
+.widget-device div.name .g {color: #8E98AD;margin-bottom: 4px;}
+.widget-device div.name .n {white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+.widget-device.active div.state svg {fill: $color-error;}
+.widget-pwm.active {background-color: $color-lights;border-color: $color-lights;}

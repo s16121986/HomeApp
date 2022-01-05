@@ -1,0 +1,107 @@
+@import "paginator";
+
+div.table-grid-wrapper {position: relative;}
+div.table-grid-wrapper div.table-checkbox-menu {position: absolute;top: 0;line-height: 30px;width: 140px;left: -145px;box-shadow: rgba(0, 0, 0, 0.247059) 0px 3px 8px 0px;
+	z-index: 999;background: #edeef0;}
+div.table-grid-wrapper div.table-checkbox-menu > div {padding: 0 15px;cursor: pointer;}
+div.table-grid-wrapper div.table-checkbox-menu > div:hover {background: #e5e5e5;}
+div.table-grid-wrapper div.table-checkbox-menu:before {content: "";display: block;position: absolute;top: 7px;left: 100%;border-left: 8px solid #edeef0;
+	border-top: 8px solid transparent;border-bottom: 8px solid transparent;}
+
+form.grid-form {margin-bottom: 16px;}
+form.grid-form div.form-field {display: inline-block;vertical-align: top;position: relative;margin-right: 9px;}
+form.grid-form div.form-field label {position: absolute;font-size: 10px;left: 5px;top: -5px;line-height: 10px;padding: 0 4px;width: auto;background: #ffffff;border-radius: 0px;z-index: 2;}
+form.grid-form div.form-field select {width: 160px;height: 26px;padding: 0 8px;}
+form.grid-form div.form-field input[type="text"] {height: 26px;padding: 0 8px;}
+form.grid-form div.form-field.field-checkbox {min-width: 80px;text-align: center;}
+form.grid-form div.form-field.field-checkbox input {margin: 7px 0;}
+form.grid-form div.field-label {min-width: 90px;}
+form.grid-form div.field-label span {display: block;line-height: 20px;padding: 3px 0;}
+form.grid-form div.field-label.field-sum span {text-align: right;}
+form.grid-form button {height: 26px;}
+form.grid-form div.element-category {min-width: 160px;}
+form.grid-form div.element-category > div.label {line-height: 24px;border: 1px solid #c0c0c0;border-radius: 2px;padding: 0 10px;}
+form.grid-form button {height: 26px;}
+
+div.grid-empty-text,
+i.empty {color: $color-cancel;font-style: italic;padding: 10px 20px;}
+table.table-grid {width: 100%;line-height: 16px;}
+div.table-grid-wrapper {}
+table.table-grid th {white-space: nowrap;text-align: left;padding: 9px 9px;font-weight: normal;}
+table.table-grid th a {color: $color-text;display: inline-block;border-bottom: 1px dashed $color-text;margin-right: 15px;}
+table.table-grid th a:hover {text-decoration: none;border-color: transparent;}
+table.table-grid th div.column-inner {position: relative;}
+table.table-grid div.grid-sorted-arrow {
+	border-color: #777 transparent;
+	border-style: solid;
+	height: 0;
+	width: 0;
+	position: absolute;
+	margin-top: -2px;
+	right: 0px;
+	top: 50%;
+}
+table.table-grid .column-sorted-desc div.grid-sorted-arrow {border-width: 0px 4px 4px 4px;}
+table.table-grid .column-sorted-asc div.grid-sorted-arrow {border-width: 4px 4px 0 4px;}
+table.table-grid .column-date {width: 120px;text-align: center;}
+table.table-grid .column-created {width: 170px;}
+table.table-grid .column-status {width: 140px;text-align: center;}
+table.table-grid .column-status_icon {width: 45px;text-align: center;}
+table.table-grid td {cursor: default;padding: 9px 9px;vertical-align: middle;}
+table.table-grid tbody tr:nth-child(odd) {background: $color-background-alt;}
+table.table-grid tr.over td {background: #f1f8fe;}
+table.table-grid tr.selected td {background: #f1f8fe;}
+table.table-grid tr.alert td {background: #fff4cd;}
+table.table-grid tbody tr:hover {background: $color-background-alt;}
+table.table-grid .column-number {text-align: right;}
+table.table-grid .column-edit {width: 32px;padding-right: 0;}
+table.table-grid .column-edit > a {display: none;width: 16px;height: 16px;vertical-align: top;opacity: .6;}
+table.table-grid tr:hover .column-edit > a {display: inline-block;}
+table.table-grid tr .column-edit > a:hover {border-bottom-color: $color-text;opacity: 1;}
+table.table-grid .boolean-true,
+table.table-grid .boolean-true a {color: $color-success;}
+table.table-grid .boolean-false a {color: $color-text;}
+table.table-grid img {max-width: 60px;max-height: 60px;}
+table.table-grid th img {width: 16px;height: 16px;}
+table.table-grid th.icon-column {text-align: right;}
+table.table-grid .boolean-false {color: $color-cancel;}
+table.table-grid .boolean-true {color: $color-success;}
+table.table-grid td img,
+table.table-grid td svg {max-width: 32px;max-height: 32px;}
+.column-actions a {display: block;}
+
+.column-number {white-space: nowrap;}
+
+.column-checkbox {width: 35px;text-align: center;}
+.column-id {white-space: nowrap;width: 80px;}
+.column-flag {width: 80px;}
+.column-database .fa,
+.column-domain .fa {font-size: 13px;vertical-align: middle;}
+.column-database i.fa {color: #888;}
+.column-database i.exists,
+.column-domain i.exists {color: #33BE7B;}
+.column-database i.empty,
+.column-domain i.empty {color: #eb5d52;}
+.column-avatar {width: 32px;}
+.column-avatar img {width: 32px;height: 32px;border-radius: 50%;object-fit: cover;}
+.column-icon,
+.column-edit,
+.column-delete {padding-left: 5px;padding-right: 5px;text-align: center;width: 26px;}
+.column-phone {white-space: nowrap;}
+.column-icon a,
+.column-edit a,
+.column-delete a {text-decoration: none;color: #888;}
+.column-icon a:hover,
+.column-edit a:hover,
+.column-delete a:hover {color: #333;}
+.column-icon a.enabled-1 {color: #000;}
+.column-phone_code {width: 100px;}
+.column-currency {width: 100px;}
+.column-default {width: 80px;}
+.column-actions {width: 34px;}
+.column-boolean {width: 34px;text-align: center;}
+table.table-grid a.button-remove {color: $color-text;}
+table.table-grid a.button-remove:hover {color: $color-error;text-decoration: none;}
+table.table-grid .actions-wrap {white-space: nowrap;}
+table.table-grid .actions-wrap > * {display: inline-block;vertical-align: top;}
+table.table-grid .actions-wrap > *:not(:last-child) {margin-right: 4px;}

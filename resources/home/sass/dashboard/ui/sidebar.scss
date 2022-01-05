@@ -1,0 +1,7 @@
+.sidebar {position: fixed;top: 0;right: 0;width: 100%;height: 100%;max-width: 640px;z-index: 10;background: #fff;box-shadow: $shadow-popup;display: flex;flex-direction: column;}
+.sidebar > .sidebar-header {line-height: 32px;display: flex;padding: 8px;}
+.sidebar > .sidebar-header .btn-back {width: 32px;height: 32px;cursor: pointer;border-radius: 50%;padding: 8px;}
+.sidebar > .sidebar-header .btn-back svg {width: 100%;height: 100%;border-radius: 50%;color: #000;vertical-align: top;}
+.sidebar-room > .sidebar-header .btn-back:hover {background-color: $color-background-alt;}
+.sidebar-room > .sidebar-header .title {flex-grow: 1;padding: 0 16px;font-weight: 500;letter-spacing: 0.6px;}
+.sidebar-room > .sidebar-content {display: flex;flex-grow: 1;}

@@ -1,0 +1,35 @@
+#!/usr/bin/env php
+<?php
+define('ROOT_PATH', realpath(__DIR__ . '/../../'));
+const CONSOLE_PATH = ROOT_PATH . '/bin/artisan';
+
+$mysqli = include ROOT_PATH . '/bootstrap/daemon.php';
+
+$table = 's_device_timers';
+
+while (true) {
+
+	$mysqli->query('UPDATE ' . $table . ' SET timeout=timeout-1');
+
+	$timers = [];
+	$result = $mysqli->query('SELECT device_id,type FROM ' . $table . ' WHERE timeout=0');
+	while ($row = $result->fetch_assoc()) {
+		$timers[] = $row;
+	}
+	$result->free();
+
+	$mysqli->query('DELETE FROM ' . $table . ' WHERE timeout=0');
+
+	foreach ($timers as $r) {
+		switch ($r['type']) {
+			case 1://TIMEOUT
+			case 2://POWER_SAFE
+				exec('php ' . CONSOLE_PATH . ' device:off ' . $r['device_id']);
+				break;
+			case 3://OFF_DELAY
+				break;
+		}
+	}
+
+	sleep(1);
+}

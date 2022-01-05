@@ -1,0 +1,102 @@
+@font-face {
+	font-family: "devices";
+	src: url("/fonts/devices/icomoon.eot?ur41x7");
+	src: url("/fonts/devices/icomoon.eot?ur41x7#iefix") format("embedded-opentype"),
+	url("/fonts/devices/icomoon.ttf?ur41x7") format("truetype"),
+	url("/fonts/devices/icomoon.woff?ur41x7") format("woff"),
+	url("/fonts/devices/icomoon.svg?ur41x7#icomoon") format("svg");
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	/* use !important to prevent issues with browser extensions that change fonts */
+	font-family: "devices" !important;
+	speak: never;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-humidity:before {
+	content: "\e910";
+}
+.icon-temperature:before {
+	content: "\e911";
+}
+.icon-cinema:before {
+	content: "\e912";
+}
+.icon-day:before {
+	content: "\e913";
+}
+.icon-evening:before {
+	content: "\e914";
+}
+.icon-relax:before {
+	content: "\e915";
+}
+.icon-sleep:before {
+	content: "\e916";
+}
+.icon-heating:before {
+	content: "\e917";
+}
+.icon-gidrolock:before {
+	content: "\e918";
+}
+.icon-cornice_light:before {
+	content: "\e901";
+}
+.icon-kh_lamps:before {
+	content: "\e902";
+}
+.icon-kh_chandelier:before {
+	content: "\e903";
+}
+.icon-led_strip_up_light:before {
+	content: "\e904";
+}
+.icon-lightning:before {
+	content: "\e905";
+}
+.icon-molding_light:before {
+	content: "\e908";
+}
+.icon-projector_screen:before {
+	content: "\e909";
+}
+.icon-spot_light:before {
+	content: "\e90c";
+}
+.icon-vacuum_cleaner:before {
+	content: "\e90d";
+}
+.icon-wall_light:before {
+	content: "\e90e";
+}
+.icon-hl_down_light:before {
+	content: "\e90f";
+}
+.icon-ceil_corner_light:before {
+	content: "\e900";
+}
+.icon-bt_main_light:before {
+	content: "\e906";
+}
+.icon-bulb:before {
+	content: "\e907";
+}
+.icon-curtains:before {
+	content: "\e90a";
+}
+.icon-fan:before {
+	content: "\e90b";
+}

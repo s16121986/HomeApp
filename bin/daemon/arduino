@@ -1,0 +1,88 @@
+#!/usr/bin/env php
+<?php
+define('ROOT_PATH', realpath(__DIR__ . '/../../'));
+const CONSOLE_PATH = ROOT_PATH . '/bin/artisan';
+//const DEBUG_MODE = true;
+
+use Arduino as ArduinoPort;
+
+$arduinoPort = new ArduinoPort();
+$arduinoPort->setPort('/dev/arduino');
+
+if (($i = $arduinoPort->open()) < 1)
+	exit(1);
+
+register_shutdown_function(function () use ($arduinoPort) {
+	$arduinoPort->close();
+});
+
+//$log = null;
+//if (DEBUG_MODE) {
+$mysqli = include ROOT_PATH . '/bootstrap/daemon.php';
+
+$log = function ($type, $s, $data = null) use ($mysqli) {
+	$mysqli->query('INSERT INTO serial_port_log (type,input,data) VALUES ("' . $type . '", "'
+		. $s . '", '
+		. ($data === null ? 'NULL' : '"' . $data . '"') . ')');
+};
+//}
+
+$byte = function ($data, $i) {
+	if (isset($data[$i]))
+		return ord($data[$i]);
+	//return ($value === 255 ? 0 : $value);
+	return 0;
+};
+
+$readInput = function ($input) use ($mysqli, $byte, $log) {
+	$pin = $byte($input, 1);
+	$param = $byte($input, 2);
+	$data = $byte($input, 3);
+
+	switch ($byte($input, 0)) {
+		case 60:
+			$type = 'event';
+			exec('php ' . CONSOLE_PATH . ' arduino:event'
+				. ' --pin=' . $pin
+				. ' --event=' . $param
+				. ' --data=' . $data);
+			break;
+		case 62:
+			$type = 'state';
+			exec('php ' . CONSOLE_PATH . ' device:state'
+				. ' --pin=' . $pin
+				. ' --state=' . (($param & 4) ? 1 : 0)
+				. ' --data=' . $data);
+			/*$mysqli->query('UPDATE home_devices'
+				. ' SET state=' . (($param & 4) ? 1 : 0) . ',data=' . $data
+				. ' WHERE module_id=1 AND channel=' . $pin);*/
+			break;
+		/* case 61: //data
+		  $pckg = new \stdClass();
+		  $pckg->id = self::pckg_val($r[1]);
+		  $pckg->type = self::pckg_val($r[2]);
+		  $pckg->data = self::pckg_val($r[3]);
+		  return $pckg; */
+		default:
+			$type = 'undefined';
+	}
+
+	$log($type, $input, '{pin:' . $pin . ',param:' . $param . ',data:' . $data . '}');
+};
+
+/*$input = chr(60)
+	. chr(33)
+	. chr(11);
+$readInput($input);
+exit;*/
+
+while (true) {
+	while ($input = $arduinoPort->read()) {
+		if (is_string($input))
+			$readInput($input);
+	}
+	sleep(1);
+}
+
+
+

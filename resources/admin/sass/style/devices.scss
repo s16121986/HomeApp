@@ -1,0 +1,59 @@
+nav.tabs {display: flex;margin-bottom: 16px;font-size: 11px;}
+nav.tabs > label {padding: 8px 0;margin-right: 8px;width: 60px;}
+nav.tabs > div {padding: 8px;border-radius: 8px;cursor: pointer;text-align: center;background: $color-background;}
+nav.tabs > div:hover {background: $color-background-alt;}
+nav.tabs > div.current {background: $color-main;color: #ffffff;}
+nav.tabs > div:not(:last-child) {margin-right: 8px;}
+
+table.devices {width: 100%;font-size: 11px;line-height: 16px;}
+table.devices tr.over {background: $color-background-alt;}
+table.devices th {font-weight: 600;padding: 8px;}
+table.devices th.sortable {cursor: pointer;white-space: nowrap;}
+table.devices th.sortable:hover {color: $color-link;}
+table.devices th.sort:after {content: "";display: inline-block;vertical-align: top;height: 16px;width: 16px;background-position: 50% 50%;background-repeat: no-repeat;background-size: 6px 6px;background-image: url("/images/ui/down-arrow.svg");}
+table.devices th.sort.asc:after {}
+table.devices th.sort.desc:after {transform: rotate(180deg);}
+table.devices td {border: 1px solid $color-border;padding: 8px 8px;}
+table.devices div.address {width: 32px;height: 16px;background: $color-main;color: #fff;border-radius: 8px;font-size: 10px;}
+table.devices span.empty {color: $color-disabled;font-style: italic;}
+
+table.devices .toggle {width: 32px;height: 16px;padding: 4px;border-radius: 8px;vertical-align: top;display: inline-block;cursor: pointer;background: $color-disabled;}
+table.devices .toggle.disabled {opacity: .6;cursor: default;}
+table.devices .toggle:before {content: "";display: inline-block;width: 8px;height: 8px;background: #ffffff;border-radius: 50%;vertical-align: top;}
+table.devices .toggle:hover:before {}
+table.devices .toggle.on {background: $color-checked;text-align: right;}
+
+.column-enabled {width: 49px;}
+.column-id,
+.column-address {text-align: center;width: 33px;}
+.column-module {width: 120px;}
+.column-icon {width: 33px;position: relative;}
+.column-icon > div.icon {width: 16px;height: 16px;background-size: 16px 16px;}
+.column-edit {width: 33px;}
+.column-edit a.ui-btn {display: none;}
+tr:hover > .column-edit a.ui-btn {display: inline-block;vertical-align: top;}
+.column-devices {color: #000;}
+.column-devices .disabled {opacity: .6;}
+
+table.devices tr.light div.icon {background-image: url("/images/icon/16/idea.png");}
+table.devices .item.switch div.icon {background-image: url("/images/icon/light-switch.svg");}
+table.devices .item._relay div.icon {background-image: url("/images/icon/16/shutdown.png");}
+table.devices .item.gerkon div.icon {background-image: url("/images/icon/16/door-sensor.png");}
+table.devices .item.curtains div.icon {background-image: url("/images/icon/16/curtains.png");}
+table.devices .item.motion div.icon {background-image: url("/images/icon/16/motion-detector.png");}
+table.devices .item.warmfloor div.icon {background-image: url("/images/icon/16/heating.png");}
+table.devices .item.leak div.icon {background-image: url("/images/icon/water-sensor.svg");}
+table.devices .item.gidrolock div.icon {background-image: url("/images/icon/16/plumbing.png");}
+table.devices .item.projector div.icon {background-image: url("/images/icon/16/video-projector.png");}
+table.devices .item.projector_screen div.icon {background-image: url("/images/icon/projector-screen.svg");}
+table.devices .item.pwm div.icon {background-image: url("/images/icon/16/light-automation.png");}
+table.devices .item.ventilation div.icon {background-image: url("/images/icon/16/fan-speed.png");}
+table.devices .item.christmas div.icon {background-image: url("/images/icon/christmas-tree.svg");}
+table.devices .item.temperature div.icon {background-image: url("/images/icon/thermometer.svg");}
+table.devices .item.vacuum_cleaner div.icon {background-image: url("/images/icon/16/bot-16.png");}
+table.devices .item.wirenboard div.icon {background-image: url("/images/icon/wirenboard.png");}
+table.devices .item.gidrolock div.icon {background-image: url("/images/icon/16/plumbing.png");}
+table.devices .item.arduino div.icon {background-image: url("/images/icon/arduino.svg");}
+table.devices .item.wc div.icon {background-image: url("/images/icon/16/wc.png");}
+table.devices .item.climate div.icon {background-image: url("/images/icon/16/climate.png");}
+table.devices .item.rgb div.icon {background-image: url("/images/icon/16/rgb.png");}

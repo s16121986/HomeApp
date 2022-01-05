@@ -1,0 +1,74 @@
+#!/usr/bin/env php
+<?php
+define('LARAVEL_START', microtime(true));
+define('ROOT_PATH', realpath(__DIR__ . '/../'));
+const APP_SCRIPT = 'socket';
+
+require ROOT_PATH . '/vendor/autoload.php';
+
+use Workerman\Worker;
+use App\Broadcaster\Notifier\Kernel;
+use App\Events\Broadcasting\WebSocketEvent;
+use App\Listeners\WebSocketEventSubscriber;
+
+$app = require_once ROOT_PATH . '/bootstrap/app.php';
+
+$service = new Kernel($app);
+$service->handle();
+
+$eventsListener = new WebSocketEventSubscriber();
+
+$connections = [];
+
+$wsWorker = new Worker('websocket://localhost:61523');
+
+// 4 processes
+//$wsWorker->count = 4;
+
+$wsWorker->onWorkerStart = function () use (&$connections) {
+	// создаём локальный tcp-сервер, чтобы отправлять на него сообщения из кода нашего сайта
+	$tcpWorker = new Worker("tcp://localhost:61522");
+	// создаём обработчик сообщений, который будет срабатывать,
+	// когда на локальный tcp-сокет приходит сообщение
+	$tcpWorker->onMessage = function ($connection, $data) use (&$connections) {
+		foreach (explode("\n", $data) as $line) {
+			if (empty($line))
+				continue;
+			$data = json_decode($line);
+			//var_dump($data);
+			//echo "\n";
+			foreach ($connections as $webConnection) {
+				$webConnection->send($data->payload);
+			}
+		}
+		// отправляем сообщение пользователю по userId
+	};
+	$tcpWorker->listen();
+};
+
+$wsWorker->onMessage = function ($connection, $data) use (&$connections, $eventsListener) {
+	//$channel = array_search($connection, $connections);
+	//$event = new WebSocketEvent($channel, json_decode($data));
+	$eventsListener->handle(new WebSocketEvent($connection, json_decode($data)));
+	//Broadcast::onMessage($connection, json_decode($data));
+};
+
+$wsWorker->onConnect = function ($connection) use (&$connections) {
+	$connection->onWebSocketConnect = function ($connection) use (&$connections) {
+		// при подключении нового пользователя сохраняем get-параметр, который же сами и передали со страницы сайта
+		$connections[] = $connection;
+		// вместо get-параметра можно также использовать параметр из cookie, например $_COOKIE['PHPSESSID']
+	};
+};
+
+$wsWorker->onClose = function ($connection) use (&$connections) {
+	// удаляем параметр при отключении пользователя
+	$index = array_search($connection, $connections);
+	unset($connections[$index]);
+
+};
+
+// Run worker
+Worker::runAll();
+
+$app->terminate();

@@ -1,0 +1,35 @@
+.widget-room > .widget-wrap {background-repeat: no-repeat;background-position: 50% 50%;background-size: cover;overflow: hidden;}
+.widget-room > .widget-wrap:hover {box-shadow: $shadow-popup;}
+/*.widget-room:before {content: "";display: block;position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: rgba(0, 0, 0, 0.2);backdrop-filter: blur(1px);border-radius: 6px;z-index: 1;}*/
+.widget-room > .widget-wrap:after {content: "";display: block;position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: rgba(0, 0, 0, .2); /*background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);*/
+}
+.widget-room .widget-title {color: #fff;text-shadow: 0 0 5px rgba(0, 0, 0, .6);font-weight: 500;letter-spacing: 1px;line-height: 16px;z-index: 2;position: relative;}
+.widget-room .widget-body {z-index: 2;}
+.widget-room .light-state {position: absolute;top: 0;right: 0;width: 16px;height: 16px;}
+.widget-room .light-state svg {fill: #ffffff;}
+.widget-room .light-state.active svg {fill: $color-error;}
+
+.widget-room button {width: 32px;height: 32px;border-radius: 50%;background-color: rgb(33, 33, 33);opacity: .9;overflow: hidden;}
+.widget-room button:hover {opacity: 1;}
+.widget-room button i {font-size: 32px;color: #fff;}
+.widget-room button.active {background-color: $color-lights;}
+.widget-room button.active svg {}
+
+.widget-room .light-buttons {position: absolute;left: 0;bottom: 0;display: flex;}
+.widget-room .light-buttons button {margin-right: 8px;}
+.widget-room .other-buttons {position: absolute;right: 0;bottom: 0;display: flex;}
+.widget-room .light-buttons button i {color: #fff;}
+.widget-room .other-buttons button {background-color: $color-others;}
+.widget-room .other-buttons button i {color: #fff;}
+.widget-room .other-buttons button:not(:last-child) {margin-right: 8px;}
+
+.widget-room.room-light .widget-body {align-items: flex-end;}
+.widget-room.room-light .name {color: #fff;font-weight: 500;font-size: 12px;}
+
+@each $room in kitchen, bedroom, balcony, hallway, bathroom, storage {
+	.room-#{$room} > .widget-wrap {background-image: url("/images/rooms/#{$room}.jpg");}
+}
+.room-kitchen {background-position: 0 70%;}
+.room-hallway {background-position: 0 70%;}
+
+/*.widget-room {border-radius: 12px;padding: 16px;min-height: 128px;background-repeat: no-repeat;background-position: 50% 50%;background-size: cover;flex-basis: 320px;overflow: hidden;cursor: pointer;margin: 8px;}*/

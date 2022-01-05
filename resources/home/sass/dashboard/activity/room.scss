@@ -1,0 +1,57 @@
+.activity-rooms {padding: 8px;display: flex;flex-direction: column;}
+.activity-rooms .widget {min-height: 80px;flex-grow: 1;}
+.activity-rooms .widget:not(:last-child) {margin-bottom: 16px;}
+
+.sidebar-room:before {position: absolute;top: 0;left: 0;width: 100%;height: 144px;content: "";background-position: 50% 50%;background-size: cover;background-repeat: no-repeat;z-index: 1;}
+.sidebar-room:after {position: absolute;top: 0;left: 0;width: 100%;height: 144px;content: "";z-index: 2;background-color: rgba(0, 0, 0, .35);}
+.sidebar-room > .sidebar-header,
+.sidebar-room > .sidebar-content {position: relative;z-index: 4;}
+.sidebar-room > .sidebar-header .title {color: #fff;}
+.sidebar-room > .sidebar-header .btn-back svg {color: #fff;}
+.sidebar-room > .sidebar-header .state {width: 32px;height: 32px;position: absolute;top: 16px;right: 16px;border-radius: 50%;padding: 6px 8px 8px 8px;cursor: pointer;background-color: #fff;box-shadow: $shadow;}
+.sidebar-room > .sidebar-header .state svg {width: 100%;height: 100%;vertical-align: top;fill: $color-error;}
+.sidebar-room.active > .sidebar-header .state {background-color: $color-error;}
+.sidebar-room.active > .sidebar-header .state svg {fill: #fff;}
+.sidebar-room .room-inner {display: flex;flex-grow: 1;flex-direction: column;}
+.sidebar-room .control-title {display: flex;}
+.sidebar-room .control-title .title {flex-grow: 1;}
+.sidebar-room .control-title .name {font-weight: 500;letter-spacing: 0.6px;font-size: 16px;line-height: 24px;}
+.sidebar-room .control-title .group {letter-spacing: 0.6px;font-size: 11px;color: #8E98AD;font-weight: 500;line-height: 16px;padding-top: 4px;display: flex;}
+.sidebar-room .control-title .separator {padding: 0 8px;background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='2' style='stroke: none; fill: %238E98AD' /%3E%3C/svg%3E") 50% 50% no-repeat;background-size: 4px 4px;width: 20px;}
+.sidebar-room .widgets-group {padding: 0 8px;}
+.sidebar-room .device-control-wrap {padding: 16px;flex-grow: 1;}
+.sidebar-room .control {display: flex;flex-direction: column;height: 100%;}
+.sidebar-room .device-control-wrap .image {flex-grow: 1;display: flex;align-items: center;justify-content: center;border-radius: 50%;overflow: hidden;}
+.sidebar-room .device-control-wrap .image i {font-size: 64px;}
+.sidebar-room .control-slider {}
+.sidebar-room .widgets-group > .group-body {flex-wrap: wrap;}
+
+.sidebar-room .lights-group > .group-title {color: #fff;}
+
+@each $room in kitchen, bedroom, balcony, hallway, bathroom, storage {
+	.sidebar-room.room-#{$room}:before {background-image: url("/images/rooms/#{$room}.jpg");}
+}
+
+.sidebar-room .widget.selected > .widget-wrap:before {content: "";display: block;position: absolute;top: 8px;left: 0px;width: 3px;height: 32px;border-radius: 0 3px 3px 0;background: $color-main;}
+
+.sidebar-room .row {margin-top: 32px;}
+.sidebar-room .row-title {font-weight: 500;font-size: 12px;color: $color-text-alt;letter-spacing: 0.6px;margin-bottom: 8px;}
+
+.sidebar-room .control-buttons {height: 48px;font-size: 11px;color: $color-text-alt;margin-top: 64px;line-height: 16px;}
+.sidebar-room .control-buttons .inner {display: flex;max-width: 240px;margin: 0 auto;height: 100%;box-shadow: 0 0 6px rgba(0, 0, 0, .1);border-radius: 6px;}
+.sidebar-room .control-buttons button {flex-grow: 1;cursor: pointer;padding: 16px 16px;text-align: center;background: none;height: 100%;}
+.sidebar-room .control-buttons button:not(:last-child) {border-right: 1px solid rgba(0, 0, 0, .05);}
+.sidebar-room .control-buttons button:first-child {border-radius: 6px 0 0 6px;}
+.sidebar-room .control-buttons button:last-child {border-radius: 0 6px 6px 0;}
+.sidebar-room .control-buttons button:hover {background: $color-background;}
+.sidebar-room .control-buttons button img {vertical-align: top;}
+
+.control-device .ui-switch {border-radius: 12px;width: 48px;height: 24px; padding: 4px; margin-top: 20px;}
+.control-device .ui-switch:before {width: 16px; height: 16px;}
+.control-device.active .ui-switch {padding-left: 28px;}
+
+.home-tabs {display: flex;flex-direction: column;line-height: 24px;padding: 96px 0 8px 0;}
+.home-tabs .tab {padding: 16px 8px;text-align: center;cursor: pointer;writing-mode: vertical-lr;transform: rotate(180deg);position: relative;background-color: #fff;}
+.home-tabs .tab:hover {color: $color-main;}
+.home-tabs .selected {color: $color-main;}
+.home-tabs .selected:before {content: "";display: block;position: absolute;width: 2px;border-radius: 1px;height: 70%;background-color: $color-main;top: 15%;left: 0;}

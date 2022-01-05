@@ -1,0 +1,5 @@
+.activity-home {display: flex;flex-direction: column;padding-top:8px;}
+.activity-home > .header {padding: 8px;height: 48px;display: flex;}
+.activity-home > .header .spacer {flex-grow: 1;}
+.activity-home > .header .btn-off {width: 32px;height: 32px;padding: 8px;cursor: pointer;}
+.activity-home > .header .btn-off svg {width: 16px;height: 16px;}

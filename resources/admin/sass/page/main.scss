@@ -1,0 +1,22 @@
+@import "~core.main";
+@import "../variables";
+@import "../ui/main";
+@import "~admin/style/layout";
+@import "~admin/style/sidebar";
+@import "~admin/style/devices";
+@import "~admin/themes/light";
+//@import "../style/layout";
+
+
+//@import "auth";
+
+form.default-form {}
+form.default-form div.form-field > label {width: 160px;}
+.content-default div.form-buttons {margin-top: 16px;justify-content: flex-end;display: flex;padding: 0 16px;}
+.content-default div.form-buttons > * {margin-left: 16px;}
+
+div.params-form div.item {display: flex;}
+div.params-form div.item > * {font-size: 11px;}
+div.params-form div.item > *:not(:last-child) {margin-right: 11px;}
+div.params-form div.item input {}
+div.params-form div.item select {}

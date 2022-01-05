@@ -1,0 +1,12 @@
+/* app-window */
+div.window {position: absolute;top: 50%;left: 50%;z-index: 99;background: #fff;box-shadow: rgba(0, 0, 0, 0.247059) 0px 3px 8px 0px;color: #000;min-width: 240px;max-width: 460px;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;transform: translateX(-50%) translateY(-50%);width: 100%;}
+div.window.loading {min-height: 160px;}
+div.window div.window-title {position: relative;line-height: 22px;padding: 21px 50px 22px 30px;background: #FAFAFA;color: #000000;font-size: 14px;font-weight: 500;-webkit-border-radius: 4px 4px 0 0;-moz-border-radius: 4px 4px 0 0;border-radius: 6px 6px 0 0;text-align: center;}
+div.window div.window-body {padding: 28px;position: relative;line-height: 1.6;text-align: center;font-size: 14px;}
+div.window div.button-close {position: absolute;top: 24px;right: 24px;z-index: 11;}
+div.window div.button-close:before {}
+div.window div.window-bottom {line-height: 27px;font-size: 14px;text-align: center;letter-spacing: 0.6px;color: #333333;padding: 19px 0;}
+.window-buttons {text-align: center;display: flex;justify-content: center;padding-bottom: 16px;}
+.window-buttons:not(:last-child) {padding-bottom: 32px;}
+.window-buttons button {height: 32px;background-color: $color-main;color: #fff;padding: 0 16px;border-radius: 4px;}
+.window-buttons button:not(:last-child) {margin-right: 16px;}
