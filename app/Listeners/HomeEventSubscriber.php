@@ -24,10 +24,10 @@ class HomeEventSubscriber {
 	public function handleActions($event) {
 		$actions = ActionRepository::getByEvent($event);
 		foreach ($actions as $action) {
-			//foreach ($action->commands() as $c) {
-			self::executeCommand($action);
-			usleep(1);
-			//}
+			foreach ($action->commands() as $c) {
+				self::executeCommand($c);
+				usleep(1);
+			}
 		}
 	}
 

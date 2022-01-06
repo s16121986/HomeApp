@@ -25,6 +25,7 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+
 .icon-humidity:before {
 	content: "\e910";
 }
@@ -45,6 +46,12 @@
 }
 .icon-sleep:before {
 	content: "\e916";
+}
+.icon-wc:before {
+	content: "\e919";
+}
+.icon-plants:before {
+	content: "\e91a";
 }
 .icon-heating:before {
 	content: "\e917";

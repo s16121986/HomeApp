@@ -13,7 +13,7 @@ class WC extends AbstractModule {
 	const FLOWERS_WATER = 4;
 
 	const WC_IR_MODE = 5;
-	const FLOWERS_LIGHT_BRIGHTNESS = 5;
+	const FLOWERS_LIGHT_BRIGHTNESS = 7;
 
 	public function wcEnable() {
 		return $this->sendCoils(self::WC_ENABLED, 1);

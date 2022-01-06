@@ -9,15 +9,19 @@ class Light110 extends Concerns\AbstractDevice {
 	use TimerTrait;
 
 	public function on() {
-		$this->setState(1, $this->data);
+		if (!$this->state(1))
+			return;
 
 		//$this->powerSafeStart();
 
-		return $this->moduleDimming($this->register, $this->data ? self::preparePercent($this->data) : 30);
+		$brightness = $this->data('brightness');
+
+		return $this->moduleDimming($this->register, $brightness ? self::preparePercent($brightness) : 30);
 	}
 
 	public function off() {
-		$this->setState(0, $this->data);
+		if (!$this->state(0))
+			return;
 
 		//$this->timerStop();
 
@@ -35,17 +39,13 @@ class Light110 extends Concerns\AbstractDevice {
 
 	public function brightness($percent) {
 		$b = self::preparePercent($percent);
-		if ($b < 0)
-			return false;
+		if ($b <= 0)
+			$b = 1;
 
-		$this->setState($this->state, $percent);
+		if (!$this->state(1, ['brightness' => $percent]))
+			return;
 
-		if ($this->state) {
-			//$this->powerSafeStart();
-
-			return $this->moduleDimming($this->register, $b);
-		} else
-			return true;
+		return $this->moduleDimming($this->register, $b);
 	}
 
 	protected static function preparePercent($percent): float {

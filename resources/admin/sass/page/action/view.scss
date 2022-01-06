@@ -1,0 +1,11 @@
+@import "../main";
+
+div.window-command {}
+div.window-command .field-entity {display: flex;}
+div.window-command .field-entity select:last-child {margin-left: 16px;}
+
+div.condition-data {margin-top: 32px;}
+
+table.default {line-height: 16px;width: 100%;}
+table.default td {padding: 8px 8px;}
+table.default tr:nth-child(even) {background: $color-background-alt;}

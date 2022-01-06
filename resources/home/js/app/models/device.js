@@ -44,6 +44,8 @@ function iconFactory(data) {
 }
 
 class Device {
+	#data;
+
 	constructor(data) {
 		this.id = +data.id;
 		this.room_id = +data.room_id;
@@ -67,15 +69,22 @@ class Device {
 
 	//get (name) { return this.#data[name]; };
 
+	data(key, value) {
+		if (undefined === value)
+			return this.#data[key];
+
+		this.#data[key] = value;
+	}
+
 	setData(d) {
 		this.state = +d.state;
-		this.data = +d.data;
+		this.#data = is_object(d.data) ? d.data : {};
 
 		return this;
 	}
 
 	updateData(d, fireEvent) {
-		if (this.state === +d.state && this.data === +d.data)
+		if (this.state === +d.state)// && this.data.wasChanged(d.data)
 			return false;
 
 		this.setData(d);
@@ -123,6 +132,7 @@ class Device {
 			'App\\Home\\Devices\\LightRelay',
 			'App\\Home\\Devices\\Light110',
 			'App\\Home\\Devices\\LightPwm',
+			'App\\Home\\Devices\\Flowers',
 		]);
 	}
 

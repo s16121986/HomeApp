@@ -48,7 +48,7 @@ class Module extends Model {
 			$this->type === 'App\Home\Modules\Arduino\Humidifier' => 'climate',
 			$this->type === 'App\Home\Modules\Arduino\Gidrolock' => 'gidrolock',
 			str_starts_with($this->type, 'App\Home\Modules\Arduino') => 'arduino',
-			str_starts_with($this->type, 'App\Home\Modules\Wirenboard') => 'wirenboard',
+			str_starts_with($this->type, 'App\Home\Modules\WirenBoard') => 'wirenboard',
 			default => null,
 		};
 	}

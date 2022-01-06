@@ -15,7 +15,7 @@
 			<a href="/device/" class="btn-cancel">Отмена</a>
 			<button type="submit" class="btn btn-submit">Создать</button>
 			<?php } else { ?>
-			<a href="/device/<?=$id?>/delete" class="btn-delete">Удалить</a>
+			<a href="/action/<?=$id?>/delete" class="btn-delete">Удалить</a>
 			<div class="spacer"></div>
 			<a href="/device/" class="btn-cancel">Отмена</a>
 			<button type="submit" class="btn btn-submit">Сохранить</button>

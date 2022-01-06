@@ -21,4 +21,9 @@ export default class Collection {
 
 	map(fn) { return this.#items.map(fn); }
 
+	destroy() {
+		this.#items.forEach(item => item.destroy());
+		this.#items = [];
+	}
+
 }

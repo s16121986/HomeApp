@@ -9,20 +9,16 @@ class LightPwm extends Concerns\AbstractDevice {
 	use TimerTrait;
 
 	public function on() {
-		if ($this->state)
+		if (!$this->state(1))
 			return;
 
-		$this->setState(1, $this->data);
-
 		//$this->powerSafeStart();
-		return $this->moduleDimming($this->register, $this->data ?? 50);
+		return $this->moduleDimming($this->register, $this->data('brightness') ?? 50);
 	}
 
 	public function off() {
-		if (!$this->state)
+		if (!$this->state(0))
 			return;
-
-		$this->setState(0, $this->data);
 
 		//$this->timerStop();
 
@@ -39,12 +35,13 @@ class LightPwm extends Concerns\AbstractDevice {
 	}
 
 	public function brightness($percent) {
-		if ($percent < 0)
-			return false;
+		if ($percent <= 0)
+			$percent = 1;
 		else if ($percent > 100)
 			$percent = 100;
 
-		$this->setState(1, $percent);
+		if (!$this->state(1, ['brightness' => $percent]))
+			return;
 
 		return $this->moduleDimming($this->register, $percent);
 	}

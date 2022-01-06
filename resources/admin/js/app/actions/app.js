@@ -18,6 +18,8 @@ export default class Application {
 	get rooms() { return this.#data.rooms; }
 
 	get devices() { return this.#data.devices; }
+
+	get(name) { return this.#data[name]; }
 }
 
 Object.assign(window, {

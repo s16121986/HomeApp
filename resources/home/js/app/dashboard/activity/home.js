@@ -5,6 +5,7 @@ import widgetDevice from "../widget/devices/factory";
 import widgetSensor from "../widget/sensors/factory";
 import WidgetRoomLight from "../widget/room-light";
 import icons from "../../ui/icons";
+import ActiveGroup from "./home/ActiveGroup";
 
 export default class Home extends Container {
 	#tabs;
@@ -74,6 +75,13 @@ export default class Home extends Container {
 			widgets: a
 		});
 		el.append(sensors.el);
+
+		const active = new ActiveGroup({
+			cls: 'devices-group',
+			title: 'Активные устройства',
+			slider: true
+		});
+		el.append(active.el);
 		//const home = new RoomHome();
 		//el.find('>div.rooms-wrap').append(home.el);
 

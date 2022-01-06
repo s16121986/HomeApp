@@ -17,9 +17,8 @@ const ROUTE_NAMESPACE = 'App\Http\Admin\Controllers\\';
 
 Route::get('/', [ROUTE_NAMESPACE . 'Controller', 'index']);
 
-$crud = function ($name, $controller, $path = null) {
-	if (null === $path)
-		$path = '/' . $name;
+$crud = function ($name, $controller) {
+	$path = '/' . $name;
 
 	if (method_exists($controller, 'index'))
 		Route::get($path, [$controller, 'index'])->name($name . '.index');
@@ -46,7 +45,11 @@ $crud('module', ROUTE_NAMESPACE . 'ModuleController');
 
 $crud('device', ROUTE_NAMESPACE . 'DeviceController');
 
-$crud('action', ROUTE_NAMESPACE . 'ActionController');
+$actionController = ROUTE_NAMESPACE . 'ActionController';
+$crud('action', $actionController);
+Route::match(['get', 'post'], '/action/{id}/event', [$actionController, 'event']);
+Route::match(['get', 'post'], '/action/{id}/condition', [$actionController, 'condition']);
+Route::match(['get', 'post'], '/action/{id}/command', [$actionController, 'command']);
 
 $crud('scenario', ROUTE_NAMESPACE . 'ScenarioController');
 

@@ -19,9 +19,9 @@ export default class Group {
 		if (!this.title)
 			el.find('>div.group-title').hide();
 
-		this.widgets.forEach(w => body.append(w.el));
-
-		if (0 === this.widgets.length)
+		if (this.widgets && this.widgets.length > 0)
+			this.widgets.forEach(w => body.append(w.el));
+		else
 			el.hide();
 
 		this.#el = el;
@@ -34,7 +34,7 @@ export default class Group {
 		return el;
 	}
 
-	get body() { return el.find('>div.group-body'); }
+	get body() { return this.el.find('>div.group-body'); }
 
 	init() {}
 

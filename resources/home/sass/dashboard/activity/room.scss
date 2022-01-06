@@ -34,21 +34,25 @@
 
 .sidebar-room .widget.selected > .widget-wrap:before {content: "";display: block;position: absolute;top: 8px;left: 0px;width: 3px;height: 32px;border-radius: 0 3px 3px 0;background: $color-main;}
 
-.sidebar-room .row {margin-top: 32px;}
-.sidebar-room .row-title {font-weight: 500;font-size: 12px;color: $color-text-alt;letter-spacing: 0.6px;margin-bottom: 8px;}
+.sidebar-room .field {margin-top: 32px;}
+.sidebar-room .field-slider .label {font-weight: 500;font-size: 12px;color: $color-text-alt;letter-spacing: 0.6px;margin-bottom: 8px;}
+.sidebar-room .field-switch {display: flex;line-height: 24px;}
+.sidebar-room .field-switch .label {margin-right: 16px;}
 
-.sidebar-room .control-buttons {height: 48px;font-size: 11px;color: $color-text-alt;margin-top: 64px;line-height: 16px;}
-.sidebar-room .control-buttons .inner {display: flex;max-width: 240px;margin: 0 auto;height: 100%;box-shadow: 0 0 6px rgba(0, 0, 0, .1);border-radius: 6px;}
-.sidebar-room .control-buttons button {flex-grow: 1;cursor: pointer;padding: 16px 16px;text-align: center;background: none;height: 100%;}
-.sidebar-room .control-buttons button:not(:last-child) {border-right: 1px solid rgba(0, 0, 0, .05);}
-.sidebar-room .control-buttons button:first-child {border-radius: 6px 0 0 6px;}
-.sidebar-room .control-buttons button:last-child {border-radius: 0 6px 6px 0;}
-.sidebar-room .control-buttons button:hover {background: $color-background;}
-.sidebar-room .control-buttons button img {vertical-align: top;}
+.sidebar-room .field-buttons {height: 32px;font-size: 11px;color: $color-text-alt;line-height: 16px;}
+.sidebar-room .field-buttons .inner {display: flex;max-width: 240px;margin: 0 auto;height: 100%;box-shadow: 0 0 6px rgba(0, 0, 0, .1);border-radius: 6px;}
+.sidebar-room .field-buttons button {flex-grow: 1;cursor: pointer;padding: 0 16px;text-align: center;background: none;height: 100%;}
+.sidebar-room .field-buttons button:not(:last-child) {border-right: 1px solid rgba(0, 0, 0, .05);}
+.sidebar-room .field-buttons button:first-child {border-radius: 6px 0 0 6px;}
+.sidebar-room .field-buttons button:last-child {border-radius: 0 6px 6px 0;}
+.sidebar-room .field-buttons button:hover {background: $color-background;}
+.sidebar-room .field-buttons button img {vertical-align: top;}
 
-.control-device .ui-switch {border-radius: 12px;width: 48px;height: 24px; padding: 4px; margin-top: 20px;}
+.control-device .ui-switch {border-radius: 12px;width: 48px;height: 24px; padding: 4px;}
 .control-device .ui-switch:before {width: 16px; height: 16px;}
-.control-device.active .ui-switch {padding-left: 28px;}
+.control-device .control-title .ui-switch {margin-top: 20px;}
+.control-device .ui-switch.active,
+.control-device.active .control-title .ui-switch {padding-left: 28px;}
 
 .home-tabs {display: flex;flex-direction: column;line-height: 24px;padding: 96px 0 8px 0;}
 .home-tabs .tab {padding: 16px 8px;text-align: center;cursor: pointer;writing-mode: vertical-lr;transform: rotate(180deg);position: relative;background-color: #fff;}

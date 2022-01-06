@@ -17,3 +17,15 @@ div.window div.window-buttons button:not(:last-child) {margin-right: 16px;}
 @media screen and (max-width: 480px) {
 	div.window {border-radius: 0; top: 0; left: 0; height: 100%; width: 100%; transform: none;}
 }
+
+div.window-form {width: 100%;max-width: 460px;text-align: center;line-height: 16px;}
+div.window-form p {margin-bottom: 32px;font-size: 14px;text-align: left;}
+div.window-form div.form-buttons {margin-top: 0;justify-content: flex-end;margin-top: 31px;}
+div.window-form div.form-buttons button {font-weight: 500;}
+div.window-form div.form-field {position: relative;}
+div.window-form div.form-field:not(:first-child) {margin-top: 32px;}
+div.window-form div.form-field:not(.field-checkbox) > label {display: inline-block;position: absolute;background: #fff;padding: 0 4px;top: -8px;left: 12px;line-height: 16px;font-size: 12px;font-weight: 500;}
+div.window-form div.form-field > input:not([type="checkbox"]),
+div.window-form div.form-field > select {height: 44px;padding: 0 16px;width: 100%;border: 1px solid $color-border;}
+div.window-form div.radio-item {line-height: 44px;text-align: left;}
+div.window-form div.radio-item input {margin-right: 8px;}

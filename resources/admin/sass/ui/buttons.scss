@@ -7,10 +7,10 @@
 
 .btn-submit {border-radius: 3px;background: $color-submit;color: #ffffff;border: none;padding: 0 16px;transition: background 0.3s ease;}
 .btn-cancel {border-radius: 3px;background: $color-cancel;color: #ffffff;border: none;padding: 0 16px;}
-.btn-delete {border-radius: 3px;background: $color-cancel;color: #ffffff;border: none;padding: 0 16px;transition: background 0.3s ease;}
+.btn-delete {border-radius: 3px;border: 1px solid transparent;padding: 0 16px;transition: background 0.3s ease;color: $color-text;}
 .btn-submit:hover,
-.btn-cancel:hover,
-.btn-delete:hover {box-shadow: $shadow-hover;}
+.btn-cancel:hover {box-shadow: $shadow-hover;}
+.btn-delete:hover {color: $color-error;border-color: $color-error;}
 
 .btn-close {width: 24px;height: 24px;cursor: pointer;opacity: .8;}
 .btn-close:hover {opacity: 1;}

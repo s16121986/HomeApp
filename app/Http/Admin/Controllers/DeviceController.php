@@ -2,6 +2,7 @@
 
 namespace App\Http\Admin\Controllers;
 
+use App\Enums\Home\DeviceGroup;
 use App\Models\Home\Device;
 use App\Models\Home\DeviceType;
 use App\Models\Scenario\Action;
@@ -35,13 +36,17 @@ class DeviceController extends Controller {
 				'items' => DeviceType::get(),
 				'emptyItem' => ''
 			])
-			->addElement('key', 'text', ['label' => 'Ключ', 'required' => true])
+			->addElement('group', 'enum', [
+				'label' => 'Группа',
+				'required' => true,
+				'enum' => DeviceGroup::class,
+				'emptyItem' => ''
+			])
+			//->addElement('key', 'text', ['label' => 'Ключ', 'required' => true])
 			->addElement('name', 'text', ['label' => 'Наименование', 'required' => true])
 			->addElement('enabled', 'checkbox', ['label' => 'Включен'])
 			->addElement('usable', 'checkbox', ['label' => 'Доступно пользователю'])
 			->addElement('channel', 'text', ['label' => 'Канал (Pin)'])
-			->addElement('default_data', 'number', ['label' => 'Данные (По умолчанию)', 'inputType' => 'number'])
-			->addElement('class', 'text', ['label' => 'Стиль'])
 			->addElement('icon', 'text', ['label' => 'Иконка'])
 			->addElement('timeout', 'text', ['label' => 'Таймаут включения'])
 			->addElement('ya_enabled', 'checkbox', ['label' => 'Yandex станция'])

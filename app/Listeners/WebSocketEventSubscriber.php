@@ -55,11 +55,11 @@ class WebSocketEventSubscriber {
 		if (!$device)
 			return;
 
-		DeviceObserver::setRoomEventsEnabled(true);
+		DeviceObserver::setRoomLightsEvents(true);
 
 		$device->command($event->action, $event->data);
 
-		DeviceObserver::setRoomEventsEnabled(false);
+		DeviceObserver::setRoomLightsEvents(false);
 	}
 
 	public function scenarioSet($event) {

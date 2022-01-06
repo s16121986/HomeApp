@@ -40,8 +40,13 @@ abstract class AbstractSensor {
 		return $this->module ?? $this->module = ModuleFactory::fromDevice($this->model);
 	}
 
-	protected function setState($state, $data = null): bool {
-		return $this->model->setState($state, $data);
+	protected function state($state, array $data = null): bool {
+		$this->model->state = $state;
+
+		if (null !== $data)
+			$this->model->data = $data;
+
+		return $this->model->wasChanged('state', 'data');
 	}
 
 }

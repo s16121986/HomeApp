@@ -3,14 +3,16 @@
 namespace App\Http\Admin\Controllers;
 
 use App\Custom\Contracts\InteractsWithScenario;
-use App\Enums\Scenario\Condition;
+use App\Models\Scenario\Condition;
 use App\Home\Home;
 use App\Models\Home\Device;
 use App\Models\Home\Room;
 use App\Models\Scenario\Action;
+use App\Models\Scenario\Command;
 use App\Models\Scenario\Scenario;
 use App\Repositories\HomeRepository;
 use Illuminate\Http\Request;
+use Form;
 use Exception;
 
 class ActionController extends Controller {
@@ -21,6 +23,41 @@ class ActionController extends Controller {
 			'script' => 'action/index',
 			'rooms' => HomeRepository::rooms(),
 			'items' => Action::get()
+		]);
+	}
+
+	public function view(Request $request, $id) {
+		$action = Action::find($id);
+		if (!$action)
+			return abort(404);
+
+		$data = $action->toArray();
+		$parent = $action->parent();
+		$data['event'] = lang($data['event']);
+		$data['parent'] = $parent ? ($parent . ' (' . $parent->id . ')') : '';
+
+		$devices = [];
+		foreach (HomeRepository::devices() as $device) {
+			$devices[] = ['id' => $device->id, 'name' => $device->room_name . ' / ' . $device->name];
+		}
+		$metadata = [
+			'id' => $id,
+			'events' => self::loadEvents(),
+			'scenarios' => HomeRepository::scenarios()->toArray(),
+			'rooms' => HomeRepository::rooms(),
+			'devices' => $devices,
+		];
+
+		$this->meta->head
+			->addMetaName('metadata', htmlspecialchars(json_encode($metadata)));
+
+		return $this->layout('action.view', [
+			'title' => $action->name,
+			'style' => 'action/view',
+			'action' => $action,
+			'conditions' => $action->conditions(),
+			'commands' => $action->commands(),
+			'data' => $data
 		]);
 	}
 
@@ -36,7 +73,7 @@ class ActionController extends Controller {
 			//if (!$entity)
 			//	return abort(404);*/
 		} else {
-			$entity = $action->model()->parent();
+			//$entity = $action->model()->parent();
 		}
 
 		$devices = [];
@@ -58,15 +95,6 @@ class ActionController extends Controller {
 				'items' => self::loadEvents(),
 				'emptyItem' => ''
 			])
-			->addElement('entity', 'select', [
-				'label' => 'Обьект команды',
-				'required' => true,
-				'items' => self::getEntities(),
-				'emptyItem' => ''
-			])
-			->addElement('entity_id', 'hidden', [])
-			->addElement('command', 'text', ['label' => 'Команда', 'required' => true])
-			->addElement('data', 'text', ['label' => 'Данные'])
 			->addElement('enabled', 'checkbox', ['label' => 'Включен'])/*->addElement('device_id', 'select', [
 				'label' => 'Устройство',
 				'items' => $devices,
@@ -83,7 +111,7 @@ class ActionController extends Controller {
 			$data = $form->getData();
 			$action = $action->model();
 
-			foreach (['parent', 'parent_id', 'entity_id'] as $k) {
+			foreach (['parent', 'parent_id'] as $k) {
 				if (empty($data[$k]))
 					$data[$k] = null;
 			}
@@ -92,18 +120,21 @@ class ActionController extends Controller {
 			$action->save();
 
 			return $this->redirect(route('action.index'));
-		} else if (!$action->new)
+		} else if (!$action->new) {
 			$form->setModel($action->model());
+			$value = [];
+		}
 
 		$metadata = [
 			//'events' => self::loadEvents(),
 			'scenarios' => HomeRepository::scenarios()->toArray(),
 			'rooms' => HomeRepository::rooms(),
 			'devices' => $devices,
-			//'conditions' => Condition::labels(),
+			//'conditions' => self::getConditions(),
 		];
 
-		$this->meta->head->addMetaName('metadata', htmlspecialchars(json_encode($metadata)));
+		$this->meta->head
+			->addMetaName('metadata', htmlspecialchars(json_encode($metadata)));
 
 		$titlePrefix = '';/*match ($entity::class) {
 			Device::class => $entity->room_name . ' / ' . $entity->name
@@ -112,7 +143,8 @@ class ActionController extends Controller {
 		return $action
 			->title($titlePrefix . ' / Новый сценарий')
 			->script('action/edit')
-			->view('action.form');
+			//->view('action.form')
+			;
 	}
 
 	public function create(Request $request) {
@@ -133,6 +165,116 @@ class ActionController extends Controller {
 		$action->update([$key => !$action->$key]);
 
 		return self::jsonResponse([$key => $action->$key]);
+	}
+
+	public function event(Request $request, $id) {
+		$action = Action::find($id);
+		if (!$action)
+			return abort(404);
+
+
+		return view('window.form', [
+			'title' => $action->name,
+			'action' => $action
+		]);
+	}
+
+	public function condition(Request $request, $id) {
+		$action = Action::find($id);
+		if (!$action)
+			return abort(404);
+
+		$commandId = $request->input('id');
+		if ($commandId === 'new')
+			$condition = new Condition();
+		else {
+			$condition = Condition::find($commandId);
+			if (!$condition)
+				return abort(404);
+			else if ($request->input('delete')) {
+				$condition->delete();
+				return $this->redirect('/action/' . $id);
+			}
+		}
+
+		$form = new Form('data');
+		$form
+			->addElement('type', 'select', [
+				'label' => 'Условие',
+				'required' => true,
+				'items' => self::getConditions(),
+				'emptyItem' => ''
+			])
+			->addElement('data', 'hidden', []);
+
+		if ($form->submit()) {
+			$data = $form->getData();
+			$data['action_id'] = $id;
+
+			$condition->fill($data);
+			$condition->save();
+
+			return self::jsonReload();
+		} else
+			$form->setData($condition->toArray());
+
+		return view('window.form', [
+			'title' => $action->name,
+			'form' => $form,
+			'cls' => 'window-condition',
+			'deleteUrl' => $condition->id ? ('/action/' . $id . '/condition?delete=1&id=' . $condition->id) : null
+		]);
+	}
+
+	public function command(Request $request, $id) {
+		$action = Action::find($id);
+		if (!$action)
+			return abort(404);
+
+		$commandId = $request->input('id');
+		if ($commandId === 'new')
+			$command = new Command();
+		else {
+			$command = Command::find($commandId);
+			if (!$command)
+				return abort(404);
+			else if ($request->input('delete')) {
+				$command->delete();
+				return $this->redirect('/action/' . $id);
+			}
+		}
+
+		$form = new Form('data');
+		$form
+			->addElement('entity', 'select', [
+				'label' => 'Обьект команды',
+				'required' => true,
+				'items' => self::getEntities(),
+				'emptyItem' => ''
+			])
+			->addElement('entity_id', 'hidden', [])
+			->addElement('command', 'text', ['label' => 'Команда', 'required' => true])
+			->addElement('data', 'text', ['label' => 'Данные']);
+
+		if ($form->submit()) {
+			$data = $form->getData();
+			$data['action_id'] = $id;
+			if (!$data['entity_id'])
+				$data['entity_id'] = null;
+
+			$command->fill($data);
+			$command->save();
+
+			return self::jsonReload();
+		} else
+			$form->setData($command->toArray());
+
+		return view('window.form', [
+			'title' => $action->name,
+			'form' => $form,
+			'cls' => 'window-command',
+			'deleteUrl' => $command->id ? ('/action/' . $id . '/command?delete=1&id=' . $command->id) : null
+		]);
 	}
 
 	public static function model(): string {
@@ -188,6 +330,31 @@ class ActionController extends Controller {
 			Room::class => lang(Room::class),
 			Scenario::class => lang(Scenario::class)
 		];
+	}
+
+	private static function getConditions() {
+		$conditions = [];
+		$namespace = 'App\Entities\Scenario\Condition\\';
+		$eventsPath = app_path('Entities/Scenario/Condition');
+
+		$handle = opendir($eventsPath);
+		while (false !== ($entry = readdir($handle))) {
+			if ($entry === '.' || $entry === '..')
+				continue;
+
+			$name = substr($entry, 0, -4);
+			if (str_starts_with($name, 'Abstract'))
+				continue;
+
+			$class = $namespace . $name;
+			$conditions[] = [
+				'id' => $class,
+				'name' => lang($class)
+			];
+		}
+		closedir($handle);
+
+		return $conditions;
 	}
 
 }

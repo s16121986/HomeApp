@@ -149,7 +149,7 @@ class Request {
 		foreach ($this->data as $d) {
 			$cmd .= ' ' . self::pack($d);
 		}
-		//var_dump($cmd);
+//		var_dump($cmd);exit;
 		//return new Response('', ['command' => $cmd]);
 
 		//$response = 1;

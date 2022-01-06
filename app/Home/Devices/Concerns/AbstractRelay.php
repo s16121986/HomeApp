@@ -7,10 +7,8 @@ abstract class AbstractRelay extends AbstractDevice {
 	use TimerTrait;
 
 	public function on() {
-		if ($this->state)
+		if (!$this->state(1))
 			return;
-
-		$this->setState(1);
 
 		//$this->powerSafeStart();
 
@@ -18,10 +16,8 @@ abstract class AbstractRelay extends AbstractDevice {
 	}
 
 	public function off() {
-		if (!$this->state)
+		if (!$this->state(0))
 			return;
-
-		$this->setState(0);
 
 		//$this->timerStop();
 

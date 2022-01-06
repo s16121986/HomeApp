@@ -13,24 +13,21 @@
 	<table class="default devices" id="table-actions">
 		<tr>
 			<th class="column-id">ID</th>
-			<th>Комната</th>
 			<th>Наименование</th>
 			<th>Событие</th>
 			<th></th>
 			<th class="column-edit"></th>
 		</tr>
-		<?php foreach ($items as $scenario) { ?>
-		<tr class="item" data-id="<?= $scenario->id; ?>" data-room="<?= $scenario->room_id ?? 'home'; ?>">
-			<td class="column-id"><?= $scenario->id; ?></td>
-			<td class="column-room"><?= $scenario->room_name ?? 'Дом'; ?></td>
-			<td class="column-name"><?= $scenario->name; ?></td>
-			<td class="column-event"><?= lang($scenario->event); ?></td>
-			<td class="column-command"><?= $scenario->command; ?></td>
+		<?php foreach ($items as $action) { ?>
+		<tr class="item" data-id="<?= $action->id; ?>" data-room="<?= $action->room_id ?? 'home'; ?>">
+			<td class="column-id"><?= $action->id; ?></td>
+			<td class="column-name"><a href="/action/<?=$action->id?>"><?= $action->name; ?></a></td>
+			<td class="column-event"><?= lang($action->event); ?></td>
 			<td class="column-enabled">
-				<div class="toggle<?= ($scenario->enabled ? ' on' : ''); ?>"></div>
+				<div class="toggle<?= ($action->enabled ? ' on' : ''); ?>"></div>
 			</td>
 			<td class="column-edit">
-				<a href="/action/<?= $scenario->id; ?>/edit" class="ui-btn btn-edit"></a>
+				<a href="/action/<?= $action->id; ?>/edit" class="ui-btn btn-edit"></a>
 			</td>
 		</tr>
 		<?php } ?>

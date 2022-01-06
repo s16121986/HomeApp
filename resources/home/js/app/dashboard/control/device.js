@@ -1,4 +1,8 @@
 import Container from "./container";
+import Collection from "../../support/collection";
+import Buttons from "./field/buttons";
+import Switch from "./field/switch";
+import Slider from "./field/slider";
 
 function deviceGroup(device) {
 	switch (device.type) {
@@ -13,14 +17,28 @@ function deviceGroup(device) {
 	}
 }
 
+function fieldFactory(id, type, params) {
+	switch (type) {
+		case 'slider':
+			return new Slider(id, params);
+		case 'switch':
+			return new Switch(id, params);
+		case 'buttons':
+			return new Buttons(id, params);
+	}
+}
+
 export default class Device extends Container {
 	#device;
+	#fields;
 
 	constructor(device, params) {
 		super('device', params);
 
 		this.#device = device;
 		this.#device.bind('update', this.update, this);
+
+		this.#fields = new Collection();
 	}
 
 	get device() { return this.#device; }
@@ -49,10 +67,30 @@ export default class Device extends Container {
 		el.append(html);
 	}
 
-	update() {}
+	addField(id, type, params) {
+		if (!params)
+			params = {};
+
+		params.value = this.device.data(id);
+
+		const field = fieldFactory(id, type, params);
+
+		this.#fields.add(field);
+
+		this.el.append(field.el);
+
+		return this;
+	}
+
+	update() {
+		this.#fields.forEach(field => { field.update(this.device.get(field.key)); });
+	}
 
 	destroy() {
 		this.#device.unbind('update', this.update);
+
+		this.#fields.destroy();
+		this.#fields = null;
 
 		super.destroy();
 	}

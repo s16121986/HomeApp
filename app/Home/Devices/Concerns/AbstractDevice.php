@@ -40,6 +40,10 @@ abstract class AbstractDevice {
 		throw new Exception('Device method [' . $name . '] not exists');
 	}
 
+	public function data($name) {
+		return $this->model->data[$name] ?? null;
+	}
+
 	public function module() {
 		return $this->module ?? $this->module = ModuleFactory::fromDevice($this->model);
 	}
@@ -54,8 +58,29 @@ abstract class AbstractDevice {
 			return $this->$command($data);
 	}
 
-	protected function setState($state, $data = null): bool {
-		return $this->model->setState($state, $data);
+	protected function state($state, array $data = null): bool {
+		$this->model->state = $state;
+
+		if (null !== $data)
+			$this->model->data = $data;
+
+		if (!$this->model->isDirty())
+			return false;
+
+		$this->model->save();
+
+		return true;
+	}
+
+	protected function update(array $data = null): bool {
+		$this->model->data = $data;
+
+		if (!$this->model->isDirty())
+			return false;
+
+		$this->model->save();
+
+		return true;
 	}
 
 }

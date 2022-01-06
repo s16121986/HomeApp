@@ -5,17 +5,13 @@ export default class Curtains extends Device {
 	init(el) {
 		super.init(el);
 
-		const self = this;
-		const actionsEl = $('<div class="control-buttons">'
-			+ '<div class="inner">'
-			+ '<button class="open" data-action="open">Открыть</button>'
-			+ '<button class="pause" data-action="stop" title="Пауза"><img src="/images/ui/16/pause.png" /></button>'
-			+ '<button class="close" data-action="close">Закрыть</button>'
-			+ '</div>'
-			+ '</div>').appendTo(el);
-
-		actionsEl.find('button').click(function () {
-			self.device.command($(this).data('action'));
-		});
+		this
+			.addField('buttons', 'buttons', {
+				buttons: [
+					{id: 'open', text: 'Открыть'},
+					{id: 'stop', text: '', icon: '<img src="/images/ui/16/pause.png" />'},
+					{id: 'close', text: 'Закрыть'}],
+				click: (key) => { this.device.command(key); }
+			});
 	}
 }

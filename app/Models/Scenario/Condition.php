@@ -8,10 +8,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 class Condition extends Model {
 
-	protected $primaryKey = false;
-
-	public $incrementing = false;
-
 	public $timestamps = false;
 
 	protected $table = 'scenario_conditions';
@@ -22,10 +18,9 @@ class Condition extends Model {
 	 * @var string[]
 	 */
 	protected $fillable = [
+		'action_id',
 		'type',
-		'device_id',
-		'value',
-		'type',
+		'data',
 	];
 
 }

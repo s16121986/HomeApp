@@ -52,7 +52,7 @@ class Room extends Model {
 						. ' INNER JOIN home_device_types t ON t.id=d.type_id'
 						. ' WHERE room_id=home_rooms.id'
 						. ' AND d.enabled=1'
-						. ' AND t.group=' . DeviceGroup::LIGHT
+						. ' AND d.group=' . DeviceGroup::LIGHT
 						. ' AND d.state=1) as light_state'));
 		});
 	}
@@ -63,6 +63,13 @@ class Room extends Model {
 
 	public function devices() {
 		return $this->hasMany(Device::class);
+	}
+
+	public function lightState(): int {
+		return Device::whereEnabled()
+			->whereIsLight()
+			->where('home_devices.state', 1)
+			->exists() ? 1 : 0;
 	}
 
 	public function updateLights() {

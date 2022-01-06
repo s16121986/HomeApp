@@ -60,6 +60,13 @@ class ActionRepository {
 		if (!$event->actionWhen($action))
 			return false;*/
 
+		foreach ($action->conditions() as $c) {
+			$handler = new $c->type($c);
+			if (!$handler->handle()) {
+				return false;
+			}
+		}
+
 		return true;
 
 		$conditions = [];

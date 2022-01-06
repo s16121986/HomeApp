@@ -16,6 +16,10 @@ class Device extends Model {
 
 	protected $table = 'home_devices';
 
+	protected $casts = [
+		'data' => 'array'
+	];
+
 	/**
 	 * The attributes that are mass assignable.
 	 *
@@ -25,12 +29,11 @@ class Device extends Model {
 		'room_id',
 		'type_id',
 		'module_id',
-		'type',
+		'group',
 		'channel',
 		'icon',
 		'image',
 		'key',
-		'class',
 		'name',
 		'ya_enabled',
 		'ya_name',
@@ -61,7 +64,7 @@ class Device extends Model {
 					'home_modules.name as module_name',
 					'home_modules.type as module_type',
 					'home_device_types.key as type',
-					'home_device_types.group',
+					//'home_device_types.group',
 					'home_device_types.name as type_name')
 				->join('home_rooms', 'home_rooms.id', '=', 'home_devices.room_id')
 				->join('home_modules', 'home_modules.id', '=', 'home_devices.module_id')
@@ -77,18 +80,6 @@ class Device extends Model {
 		return Room::find($this->room_id);
 	}
 
-	public function setState($state, $data = null): bool {
-		if ($state === $this->state && $this->data === $data)
-			return true;
-
-		if (null === $data)
-			$this->update(['state' => $state]);
-		else
-			$this->update(['state' => $state, 'data' => $data]);
-
-		return true;
-	}
-
 	public static function scopeWhereEnabled(Builder $builder) {
 		$builder->where('home_devices.enabled', 1);
 	}
@@ -98,7 +89,7 @@ class Device extends Model {
 	}
 
 	public static function scopeWhereIsLight(Builder $builder) {
-		$builder->where('home_device_types.group', DeviceGroup::LIGHT);
+		$builder->where('home_devices.group', DeviceGroup::LIGHT);
 	}
 
 	public static function scopeWhereActive(Builder $builder) {

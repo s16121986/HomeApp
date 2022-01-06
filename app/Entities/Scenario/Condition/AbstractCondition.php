@@ -9,12 +9,12 @@ abstract class AbstractCondition {
 
 	public function __construct($condition) {
 		$this->condition = $condition;
-		if (str_starts_with($condition->value, '{'))
-			$this->data = json_decode($condition->value);
+		if ($condition->data)
+			$this->data = json_decode($condition->data);
 	}
 
 	public function __get($name) {
-		return $this->data[$name] ?? $this->condition->$name;
+		return $this->data->$name ?? $this->condition->$name;
 	}
 
 	abstract public function handle(): bool;

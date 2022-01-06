@@ -15,6 +15,7 @@ div.form-buttons {margin-top: 32px;padding: 16px 8px 0 8px;border-top: 1px solid
 div.form-buttons > * {height: 32px;vertical-align: top;}
 div.form-buttons > *:not(:last-child) {margin-right: 16px;}
 div.form-buttons > a {line-height: 32px;display: inline-block;}
+div.form-buttons > a.btn-delete {line-height: 30px;}
 div.form-buttons > a:hover {text-decoration: none;}
 div.form-buttons .spacer {flex-grow: 1;}
 div.form-buttons .btn-delete {}

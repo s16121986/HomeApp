@@ -31,7 +31,6 @@ class Room {
 
 	public function lightOn() {
 		//DeviceObserver::setRoomEventsEnabled(false);
-
 		$lights = $this->model->lights;
 		if (empty($lights))
 			$lights = $this->model->devices()
@@ -39,11 +38,13 @@ class Room {
 				->whereDefault()
 				->pluck('id');
 
+		DeviceObserver::setRoomStateEvents(false);
+
 		foreach ($lights as $id) {
 			DeviceFactory::find($id)->on();
 		}
 
-		//DeviceObserver::setRoomEventsEnabled(true);
+		DeviceObserver::setRoomStateEvents(true);
 
 		StateChanged::dispatch(RoomModel::find($this->model->id));
 	}
@@ -52,14 +53,18 @@ class Room {
 		//DeviceObserver::setRoomEventsEnabled(false);
 		//$dispatcher = RoomModel::getEventDispatcher();
 		//RoomModel::unsetEventDispatcher();
-
 		$ids = $this->model->devices()
 			->whereIsLight()
 			->whereActive()
 			->pluck('id');
+
+		DeviceObserver::setRoomStateEvents(false);
+
 		foreach ($ids as $id) {
 			DeviceFactory::find($id)->off();
 		}
+
+		DeviceObserver::setRoomStateEvents(true);
 
 		//RoomModel::setEventDispatcher($dispatcher);
 		//DeviceObserver::setRoomEventsEnabled(true);

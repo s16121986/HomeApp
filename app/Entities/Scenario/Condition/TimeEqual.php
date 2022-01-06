@@ -2,10 +2,10 @@
 
 namespace App\Entities\Scenario\Condition;
 
-class TimeRange extends AbstractCondition {
+class TimeEqual extends AbstractCondition {
 
 	public function handle(): bool {
-		return false;
+		return date('H:i') === $this->time;
 	}
 
 }

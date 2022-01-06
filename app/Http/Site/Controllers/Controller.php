@@ -5,6 +5,7 @@ namespace App\Http\Site\Controllers;
 use App\Events\Device\StateChanged;
 use App\Events\Sensors\ButtonPressed;
 use App\Events\Sensors\ButtonReleased;
+use App\Events\Sensors\MotionDetected;
 use App\Models\Home\Device;
 use App\Models\Home\Room;
 use App\Services\Http\MetaService;
@@ -34,20 +35,23 @@ class Controller extends BaseController {
 	public function test() {
 		//$x = new \App\Home\Modules\WirenBoard\ACDimmer(12);
 		//exit;
-		/*$device = home()->device(38);
-		$device->toggle();
+		/*$device = home()->device(25);
+		$device->brightness(95);
 		exit;*/
 
-		/*$room = Room::find(5);
+		//$room = Room::find(5);
+		/*$room = home()->room(4);
+		$room->lightOn();
 		dd($room->lights);*/
 		/*$room->updateLights();*/
 		//$device = Device::find(33);
 		//$device->fill(['state' => 1]);
 		//$device = Device::find(11);
 		//ButtonReleased::dispatch($device);
-		$device = Device::find(32);
-		ButtonPressed::dispatch($device);
-		//StateChanged::dispatch($device);
+		//$device = Device::find(11);
+		//ButtonReleased::dispatch($device);
+		//MotionDetected::dispatch($device);
+		\App\Events\Room\StateChanged::dispatch(Room::find(4));
 	}
 
 }

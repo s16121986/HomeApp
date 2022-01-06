@@ -3,6 +3,7 @@
 	"App\\Enums\\Home\\DeviceGroup::LIGHT": "Освещение",
 	"App\\Enums\\Home\\DeviceGroup::PERIPHERALS": "Периферия",
 	"App\\Enums\\Home\\DeviceGroup::SENSOR": "Датчики",
+	"App\\Enums\\Home\\DeviceGroup::LIGHTNING": "Подсветка",
 	"App\\Events\\Home\\Timer": "Сценарий.Таймер",
 	"App\\Events\\Home\\Nightfall": "Сценарий.Закат",
 	"App\\Events\\Home\\Sunrise": "Сценарий.Восход",

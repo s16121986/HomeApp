@@ -30,23 +30,19 @@ class Action extends Model {
 	];
 
 	public function parent() {
-		return $this->parent::find($this->parent_id);
-	}
-
-	public function entity() {
-		return $this->entity::find($this->entity_id);
+		return $this->parent ? $this->parent::find($this->parent_id) : null;
 	}
 
 	public function isParent($parent): bool {
 		return $this->parent === $parent::class && $this->parent_id === $parent->id;
 	}
 
-	public function isEntity($entity): bool {
-		return $this->entity === $entity::class && $this->entity_id === $entity->id;
-	}
-
 	public function conditions() {
 		return $this->hasMany(Condition::class)->get();
+	}
+
+	public function commands() {
+		return $this->hasMany(Command::class)->get();
 	}
 
 	public function __toString(): string {

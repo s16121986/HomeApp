@@ -53,7 +53,7 @@
 		$moduleFilter = function ($device) {
 			return match (true) {
 				str_starts_with($device->module_type, 'App\Home\Modules\Arduino') => 'arduino',
-				str_starts_with($device->module_type, 'App\Home\Modules\Wirenboard') => 'wirenboard',
+				str_starts_with($device->module_type, 'App\Home\Modules\WirenBoard') => 'wirenboard',
 				default => 'other',
 			};
 		};
