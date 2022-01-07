@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider {
 	 * @return void
 	 */
 	public function boot() {
-		//
+		date_default_timezone_set('europe/moscow');
 	}
 
 }

@@ -4,6 +4,7 @@ namespace App\Events\Home;
 
 use App\Custom\Contracts\InteractsWithScenario;
 use App\Models\Home\Sensors;
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;

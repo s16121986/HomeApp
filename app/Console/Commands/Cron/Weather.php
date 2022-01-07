@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands\Event;
+namespace App\Console\Commands\Cron;
 
 use App\Events\Home\Nightfall;
 use App\Events\Home\Sunrise;
@@ -27,7 +27,7 @@ class Weather extends Command {
 		];
 		foreach ($assoc as $k => $n) {
 			Sensors::where('name', $n)
-				->update(['value' => $fact->$k, 'updated' => 'CURRENT_TIMESTAMP']);
+				->update(['value' => $fact->$k]);
 		}
 
 		if ($fact->daytime !== $daytime) {

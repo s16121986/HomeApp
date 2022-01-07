@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Console\Commands\Cron\Timer;
+use App\Console\Commands\Cron\Weather;
 use App\Console\Commands\Daemon\ArduinoEvent;
 use App\Console\Commands\Home\DeviceOff;
 use App\Console\Commands\Home\DeviceOn;
@@ -13,7 +15,9 @@ class Kernel extends ConsoleKernel {
 	protected $commands = [
 		ArduinoEvent::class,
 		DeviceOff::class,
-		DeviceOn::class
+		DeviceOn::class,
+		Timer::class,
+		Weather::class
 	];
 
 	/**

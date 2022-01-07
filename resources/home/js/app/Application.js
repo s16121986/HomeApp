@@ -5,14 +5,21 @@ class Application {
 
 	static getInstance() { return this.#instance || (this.#instance = new Application()); }
 
+	#ready = false;
+
 	boot() {
 		broadcaster()
 			.send({
 				method: 'home.getInfo',
-				success: function (result) {
-					home().boot(result);
-					//this.#info = result;
-					this.trigger('ready');
+				success: (result) => {
+					if (this.#ready)
+						home().update(result);
+					else {
+						this.#ready = true;
+						home().boot(result);
+						//this.#info = result;
+						this.trigger('ready');
+					}
 				},
 				scope: this
 			})

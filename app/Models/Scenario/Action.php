@@ -58,9 +58,14 @@ class Action extends Model {
 	}
 
 	public static function scopeWhereParent($query, $entity) {
-		$query
-			->where('scenario_actions.parent', $entity::class)
-			->where('scenario_actions.parent_id', $entity->id);
+		if ($entity)
+			$query
+				->where('scenario_actions.parent', $entity::class)
+				->where('scenario_actions.parent_id', $entity->id);
+		else
+			$query
+				->whereNull('scenario_actions.parent')
+				->whereNull('scenario_actions.parent_id');
 	}
 
 	public static function scopeWhereEntity($query, $entity) {

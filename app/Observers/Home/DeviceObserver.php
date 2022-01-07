@@ -8,7 +8,7 @@ use App\Models\Home\Device;
 
 class DeviceObserver {
 
-	public static $loopIndex = 0;
+	//public static $loopIndex = 0;
 
 	private static bool $roomLightEvents = false;
 
@@ -23,18 +23,15 @@ class DeviceObserver {
 	}
 
 	public function saved(Device $device) {
-		if (self::$loopIndex++ > 10) {
-			var_dump(123);
-			return;
-		}
-
 		if ($device->wasChanged('state') || $device->wasChanged('data')) {
 			StateChanged::dispatch($device);
 
+			$room = $device->room();
 			if (self::$roomLightEvents)
-				$device->room()->updateLights();
-			else if (self::$roomStateEvent)
-				RoomStateChanged::dispatch($device->room());
+				$room->updateLights();
+
+			if (self::$roomStateEvent)
+				RoomStateChanged::dispatch($room);
 		}
 	}
 

@@ -8,9 +8,9 @@ use App\Models\Home\Room;
 class RoomObserver {
 
 	public function saved(Room $room) {
-		if ($room->wasChanged('lights')) {
+		/*if ($room->wasChanged('lights')) {
 			StateChanged::dispatch($room);
-		}
+		}*/
 	}
 
 }

@@ -33,6 +33,7 @@ class Controller extends BaseController {
 	}
 
 	public function test() {
+		//\App\Events\Home\Nightfall::dispatch();
 		//$x = new \App\Home\Modules\WirenBoard\ACDimmer(12);
 		//exit;
 		/*$device = home()->device(25);
@@ -48,10 +49,15 @@ class Controller extends BaseController {
 		//$device->fill(['state' => 1]);
 		//$device = Device::find(11);
 		//ButtonReleased::dispatch($device);
-		//$device = Device::find(11);
+
+		/*$device = Device::find(3);
+		$device->state = 0;
+		$device->save();*/
+
+		/*$device = Device::find(11);
 		//ButtonReleased::dispatch($device);
-		//MotionDetected::dispatch($device);
-		\App\Events\Room\StateChanged::dispatch(Room::find(4));
+		MotionDetected::dispatch($device);
+		//\App\Events\Room\StateChanged::dispatch(Room::find(4));*/
 	}
 
 }

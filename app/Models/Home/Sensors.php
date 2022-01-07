@@ -8,11 +8,15 @@ use Illuminate\Database\Eloquent\Builder;
 
 class Sensors extends Model {
 
+	const CREATED_AT = null;
+
+	const UPDATED_AT = 'updated';
+
 	protected $primaryKey = false;
 
 	public $incrementing = false;
 
-	public $timestamps = false;
+	public $timestamps = true;
 
 	protected $table = 'home_sensors';
 

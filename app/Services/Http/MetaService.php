@@ -10,7 +10,7 @@ class MetaService {
 	private static array $defaults = [
 		'style' => 'main'
 	];
-	protected string $version = 'v115';
+	protected string $version = 'v117';
 	protected $page;
 
 	public static function setDefaults(array $data) {

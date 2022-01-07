@@ -26,21 +26,11 @@ $(document).ready(function () {
 			const tr = $(this);
 			const id = tr.data('id');
 
-			tr.find('td.column-enabled div.toggle')
-				.data('id', id)
-				.click(toggleDecorator('enabled'));
-
-			tr.find('td.column-default div.toggle')
-				.data('id', id)
-				.click(toggleDecorator('default'));
-
-			tr.find('td.column-main div.toggle')
-				.data('id', id)
-				.click(toggleDecorator('main'));
-
-			tr.find('td.column-favorite div.toggle')
-				.data('id', id)
-				.click(toggleDecorator('favorite'));
+			['ya_enabled', 'enabled', 'default', 'main', 'favorite'].forEach((k) => {
+				tr.find('td.column-' + k + ' div.toggle')
+					.data('id', id)
+					.click(toggleDecorator(k));
+			});
 
 			tr.find('div.icon')
 				.data('id', id)

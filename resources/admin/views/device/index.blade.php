@@ -88,6 +88,9 @@
 		<td class="column-name">
 			<a href="/device/<?= $device->id; ?>"><?= \App\Enums\Home\DeviceGroup::getLabel($device->group) . ' / ' . $device->name; ?></a>
 		</td>
+		<td class="column-ya_enabled">
+			<div class="toggle<?= ($device->ya_enabled ? ' on' : ''); ?>"></div>
+		</td>
 		<td class="column-name"><?= $device->ya_name; ?></td>
 		<td class="column-main">
 			<div class="toggle<?= ($device->main ? ' on' : ''); ?>"></div>

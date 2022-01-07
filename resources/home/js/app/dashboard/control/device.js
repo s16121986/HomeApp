@@ -83,7 +83,7 @@ export default class Device extends Container {
 	}
 
 	update() {
-		this.#fields.forEach(field => { field.update(this.device.get(field.key)); });
+		this.#fields.forEach(field => { field.update(this.device.data(field.id)); });
 	}
 
 	destroy() {

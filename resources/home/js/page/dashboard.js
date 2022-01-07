@@ -21,12 +21,6 @@ $(document).ready(async function () {
 				.bind('open', () => {
 					container.removeClass('loading');
 					broadcastTimer.reset();
-					broadcaster()
-						.send({
-							method: 'home.getInfo',
-							success: (result) => { home().update(result); },
-							scope: this
-						})
 				})
 				.bind('close', () => {
 					container.addClass('loading');
