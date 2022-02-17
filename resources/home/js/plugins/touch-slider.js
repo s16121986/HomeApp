@@ -11,7 +11,6 @@ $.fn.touchSlider = function (options) {
 	}, options);
 
 	const el = $(this);
-	const items = el.find(options.item);
 	let pos = {margin: 0, x: 0};
 
 	el.css({overflow: 'hidden'});
@@ -19,7 +18,7 @@ $.fn.touchSlider = function (options) {
 	const needWrap = function () {
 		const W = el.outerWidth();
 		let w = 0;
-		items.each(function () { w += $(this).outerWidth(true); });
+		el.find(options.item).each(function () { w += $(this).outerWidth(true); });
 
 		return W < w;
 	};
@@ -35,7 +34,7 @@ $.fn.touchSlider = function (options) {
 			return;
 		}
 
-		const w = items.eq(0).outerWidth(true);
+		const w = el.find(options.item).eq(0).outerWidth(true);
 		const m = s % w;
 		if (m === 0)
 			return;

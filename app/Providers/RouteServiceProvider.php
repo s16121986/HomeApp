@@ -38,7 +38,7 @@ class RouteServiceProvider extends ServiceProvider {
 
 		switch (APP_SCRIPT) {
 			case 'web_home':
-				return $this->mapWebRoutes('site');
+				return $this->mapWebRoutes();
 			case 'web_admin':
 				return $this->mapAdminRoutes();
 			case 'web_api':
@@ -49,14 +49,18 @@ class RouteServiceProvider extends ServiceProvider {
 	}
 
 	private function mapAdminRoutes() {
-		return $this->mapWebRoutes('admin');
-	}
-
-	private function mapWebRoutes($sub) {
-		$this->routes(function () use ($sub) {
+		$this->routes(function () {
 			Route::middleware('web')
 				->namespace($this->namespace)
-				->group(base_path('routes/' . $sub . '.php'));
+				->group(base_path('routes/admin.php'));
+		});
+	}
+
+	private function mapWebRoutes() {
+		$this->routes(function () {
+			Route::middleware('web')
+				->namespace($this->namespace)
+				->group(base_path('routes/site.php'));
 		});
 	}
 

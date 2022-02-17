@@ -7,6 +7,9 @@
 
 namespace App\Services\IO\Modbus;
 
+use App\Services\IO\Modbus\Util\CRC16;
+use App\Services\IO\SerialTool\Request as Base;
+
 class Request {
 
 	const FN_CODE_READ_COILS = 0x01; //Чтение значений нескольких регистров флагов
@@ -21,13 +24,23 @@ class Request {
 	const PROTOCOL_RTU = 'rtu';
 	const PROTOCOL_TCP = 'tcp';
 
+	/*protected $portOptions = [
+		'port' => '/dev/RS485',
+		'parity' => 'N',   //контроль четности, default=N
+		'dataBits' => 8, //количество передаваемых бит данных (7 или 8, по умолчанию — 8), default=8
+		'stopBits' => 2, //default=1
+		'timeout' => null,  //default=0.1
+		'baud' => 9600,     //скорость передачи данных по последовательной линии, default=9600
+		'debug' => false
+	];*/
 	protected $portOptions = [
 		'port' => '/dev/RS485',
 		'protocol' => self::PROTOCOL_RTU,
 		'parity' => 'none',
 		'stopBit' => 2,
 		'sendBit' => 8,
-		'boudRate' => 9600
+		'boudRate' => 9600,
+		'debug' => true
 	];
 
 	protected $address = 0;
@@ -37,26 +50,26 @@ class Request {
 	protected $data = [];
 
 	public function __get($name) {
-		return isset($this->portOptions[$name]) ? $this->portOptions[$name] : null;
+		return $this->$name ?? $this->portOptions[$name] ?? null;
 	}
 
-	public function setAddress($address) {
+	public function setAddress($address): static {
 		return $this->set('address', $address);
 	}
 
-	public function setFunction($code) {
+	public function setFunction($code): static {
 		return $this->set('function', $code);
 	}
 
-	public function setRegister($register) {
+	public function setRegister($register): static {
 		return $this->set('register', $register);
 	}
 
-	public function setCount($count) {
+	public function setCount($count): static {
 		return $this->set('count', $count);
 	}
 
-	public function setData($data) {
+	public function setData($data): static {
 		if (!is_array($data))
 			$data = [$data];
 		if (count($data) > 1)
@@ -71,7 +84,7 @@ class Request {
 	}
 
 	public function sendCoils($register, $data) {
-		return $this->write(self::FN_CODE_WRITE_SINGLE_COIL, $register, $data);
+		return $this->write(self::FN_CODE_WRITE_SINGLE_COIL, $register, $data ? 0xFF00 : 0);
 	}
 
 	public function readHoldingRegisters($startRegister = 0, $count = 1) {
@@ -114,6 +127,20 @@ class Request {
 			->send();
 	}
 
+	/*public function send() {
+		$bytes = [];
+		$bytes[] = $this->address;
+		$bytes[] = $this->function;
+		self::splitBytes($bytes, $this->register);
+		foreach ($this->data as $d) {
+			self::splitBytes($bytes, $d);
+		}
+		$crc = CRC16::calculate($bytes);
+		self::splitBytes($bytes, $crc);
+
+		return parent::send(...$bytes);
+	}*/
+
 	protected function send() {
 		//return true;
 		//modbus_client --debug -mrtu -pnone -s2 /dev/ttyRS485-1 -a1 -t0x05 -r0x05 0x01
@@ -149,8 +176,9 @@ class Request {
 		foreach ($this->data as $d) {
 			$cmd .= ' ' . self::pack($d);
 		}
-//		var_dump($cmd);exit;
+		//var_dump($cmd);exit;
 		//return new Response('', ['command' => $cmd]);
+		//\DB::table('api_log')->insert(['request' => $cmd]);
 
 		//$response = 1;
 		return new Response(shell_exec($cmd), ['command' => $cmd]);
@@ -161,8 +189,13 @@ class Request {
 		return $this;
 	}
 
-	protected static function pack($data) {
+	protected static function pack($data): string {
 		return '0x' . dechex($data);
+	}
+
+	protected static function splitBytes(&$bytes, $data) {
+		$bytes[] = $data >> 8;
+		$bytes[] = $data & 0xff;
 	}
 
 }

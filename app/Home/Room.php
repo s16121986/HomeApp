@@ -11,6 +11,14 @@ class Room {
 
 	protected RoomModel $model;
 
+	public static function factory($room): static {
+		if ($room instanceof RoomModel)
+			return new static($room);
+
+		$room = RoomModel::find($room);
+		return new static($room);
+	}
+
 	public function __construct(RoomModel $model) {
 		$this->model = $model;
 	}

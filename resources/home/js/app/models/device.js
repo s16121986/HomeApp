@@ -7,17 +7,8 @@ export const DEVICE_GROUPS = {
 	SENSOR: 1,
 	DEVICES: 2,
 	LIGHT: 3,
-	PERIPHERALS: 4
-};
-
-export const DEVICE_TYPES = {
-	CURTAINS: 'Curtains',
-	FAN: 'Fan',
-	GIDROLOCK: 'Gidrolock',
-	LIGHT_PWM: 'light_pwm',
-	LIGHT_RELAY: 'light_relay',
-	PROJECTOR_SCREEN: 'ProjectorScreen',
-	VACUUM_CLEANER: 'VacuumCleaner'
+	PERIPHERALS: 4,
+	LIGHTNING: 5
 };
 
 function iconFactory(data) {
@@ -124,7 +115,7 @@ class Device {
 
 	isEnabled() { return this.enabled; }
 
-	isLight() { return this.group === DEVICE_GROUPS.LIGHT; }
+	isLight() { return this.group === DEVICE_GROUPS.LIGHT || this.group === DEVICE_GROUPS.LIGHTNING; }
 
 	isStatable() {
 		return in_array(this.type, [

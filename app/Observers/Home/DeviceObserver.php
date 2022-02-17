@@ -26,6 +26,9 @@ class DeviceObserver {
 		if ($device->wasChanged('state') || $device->wasChanged('data')) {
 			StateChanged::dispatch($device);
 
+			if (!$device->isLight())
+				return;
+
 			$room = $device->room();
 			if (self::$roomLightEvents)
 				$room->updateLights();

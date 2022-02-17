@@ -39,7 +39,7 @@
 			<th data-sort="column-module">Модуль</th>
 			<th data-sort="column-room">Комната</th>
 			<th data-sort="column-name">Группа / Наименование</th>
-			<th data-sort="column-name">Yandex</th>
+			<th>Yandex</th>
 			<th>Основной</th>
 			<th>По умолчанию</th>
 			<th>Избранное</th>
@@ -91,7 +91,7 @@
 		<td class="column-ya_enabled">
 			<div class="toggle<?= ($device->ya_enabled ? ' on' : ''); ?>"></div>
 		</td>
-		<td class="column-name"><?= $device->ya_name; ?></td>
+		<!--<td class="column-name"><?= $device->ya_name; ?></td>-->
 		<td class="column-main">
 			<div class="toggle<?= ($device->main ? ' on' : ''); ?>"></div>
 		</td>

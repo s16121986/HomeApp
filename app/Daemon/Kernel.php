@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Broadcaster\Notifier;
+namespace App\Daemon;
 
 use Illuminate\Contracts\Foundation\Application;
 
@@ -28,7 +28,7 @@ class Kernel {
 		//static::run();
 	}
 
-	private function bootstrap() {
+	public function bootstrap() {
 		if (!$this->app->hasBeenBootstrapped())
 			$this->app->bootstrapWith($this->bootstrappers);
 

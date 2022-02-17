@@ -14,7 +14,9 @@ export default class Broadcaster {
 		if (this.#instance)
 			return this.#instance;
 
-		this.#instance = new Broadcaster('ws://socket.smart.home/socket', {
+		const protocol = location.protocol === 'https:' ? 'wss' : 'ws';
+
+		this.#instance = new Broadcaster(protocol + '://' + location.host + '/socket', {
 			client: 'web_main',
 		});
 		//io.bind('message', data => { notifications.message(data); });
@@ -50,7 +52,6 @@ export default class Broadcaster {
 				return;
 
 			this.#ws = undefined;
-			//console.log(event);
 			/*if (event.wasClean) {
 				alert('Соединение закрыто чисто');
 			} else {
@@ -75,7 +76,7 @@ export default class Broadcaster {
 			//console.log(event);
 		};
 
-		ws.onerror = (error) => {
+		ws.onerror = (error, a) => {
 			if (!this.#ws)
 				return;
 

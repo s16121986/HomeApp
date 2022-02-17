@@ -119,4 +119,8 @@ class Home {
 			->exists();
 	}
 
+	public function __toString(): string {
+		return 'Дом';
+	}
+
 }

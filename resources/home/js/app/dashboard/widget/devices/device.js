@@ -48,6 +48,8 @@ export default class Device extends Container {
 			e.stopPropagation();
 
 			this.command('toggle');
+
+			this.click();
 		});
 	}
 
@@ -62,7 +64,10 @@ export default class Device extends Container {
 
 	click() { this.showActivity(); }
 
-	update() {}
+	update() {
+		if (this.isStatable())
+			this.updateState();
+	}
 
 	command(name, data) { this.#device.command(name, data); }
 

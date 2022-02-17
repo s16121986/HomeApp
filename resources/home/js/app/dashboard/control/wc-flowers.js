@@ -14,7 +14,7 @@ export default class WCFlowers extends Device {
 				label: 'Яркость фитолампы',
 				change: (p) => {
 					if (0 === p)
-						this.device.off();
+						this.device.command('brightness', 1);
 					else
 						this.device.command('brightness', p);
 				}

@@ -16,7 +16,7 @@ class Request {
 		'debug' => false
 	];
 
-	public function __construct(array $options = null) {
+	public function __construct(array $options = []) {
 		foreach ($options as $k => $v) {
 			$this->portOptions[$k] = $v;
 		}
@@ -33,7 +33,6 @@ class Request {
 			$cmd .= ' --debug';
 
 		//$cmd .= ' --raw';
-
 		$cmdArgs = [
 			'b' => 'baud',
 			'p' => 'parity',
@@ -50,7 +49,8 @@ class Request {
 
 		$cmd .= ' -x "' . self::pack(func_get_args()) . '"';
 
-		//var_dump($cmd);//exit;
+		//\DB::table('api_log')->insert(['request' => $cmd]);
+		//var_dump($cmd);exit;
 
 		return new Response(shell_exec($cmd));
 	}

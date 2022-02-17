@@ -11,7 +11,7 @@ $(document).ready(function () {
 					.addClass('disabled')
 					.toggleClass('on');
 
-				Http.getJSON('/scenario/' + el.data('id') + '/update?' + url, function () {
+				Http.getJSON('/scenario/' + el.data('id') + '/update?action=' + url, function () {
 					el.removeClass('disabled');
 				});
 			};

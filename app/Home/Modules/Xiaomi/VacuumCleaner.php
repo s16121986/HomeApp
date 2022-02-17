@@ -1,15 +1,15 @@
 <?php
-
+//https://github.com/Maxmudjon/com.xiaomi-miio/blob/master/docs/obtain_token.md
 namespace App\Home\Modules\Xiaomi;
 
 use App\Services\IO\Xiaomi\Request;
 
 class VacuumCleaner {
 
-	const IP = '192.168.1.104';
-	const TOKEN = '3266693472594b486b586e455a753774';
+	const IP = '192.168.1.66';
+	const TOKEN = '715037584d76735672353238596c4b50';
 
-	//mirobo --ip 192.168.1.104 --token 3266693472594b486b586e455a753774 start
+	//mirobo --ip 192.168.1.66 --token 715037584d76735672353238596c4b50 start
 
 	public function start() {
 		return self::send('start');

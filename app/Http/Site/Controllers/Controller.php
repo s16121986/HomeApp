@@ -2,13 +2,16 @@
 
 namespace App\Http\Site\Controllers;
 
+use App\Entities\Scenario\Condition\TimeEqual;
 use App\Events\Device\StateChanged;
+use App\Events\Home\Timer;
 use App\Events\Sensors\ButtonPressed;
 use App\Events\Sensors\ButtonReleased;
 use App\Events\Sensors\MotionDetected;
 use App\Models\Home\Device;
 use App\Models\Home\Room;
 use App\Services\Http\MetaService;
+use App\Services\IO\Modbus\Util\CRC16;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -33,12 +36,34 @@ class Controller extends BaseController {
 	}
 
 	public function test() {
+		//Timer::dispatch();
 		//\App\Events\Home\Nightfall::dispatch();
 		//$x = new \App\Home\Modules\WirenBoard\ACDimmer(12);
 		//exit;
-		/*$device = home()->device(25);
-		$device->brightness(95);
-		exit;*/
+
+		$bytes = [];
+		$bytes[] = 22;
+		$bytes[] = 5;
+		self::splitBytes($bytes, 4);
+		self::splitBytes($bytes, 1 ? 0xFF00 : 0);
+		$crc = CRC16::calculate($bytes);
+		var_dump($crc);
+		self::splitBytes($bytes, $crc);
+
+		/*$buffer = [];
+		$buffer[] = self::packByte(22);
+		$buffer[] = self::packByte(5);
+		self::splitBytes($buffer, 4);
+		self::splitBytes($buffer, 1 ? 0xFF00 : 0);
+		var_dump(implode('', $buffer));
+		self::splitBytes($buffer, CRC16::calculate(implode('', $buffer)));*/
+		foreach ($bytes as $byte) {
+			var_dump(self::packByte($byte));
+		}
+
+		//$device = home()->device(28);
+		//$device->moduleFlowersLightOn();
+		exit;/**/
 
 		//$room = Room::find(5);
 		/*$room = home()->room(4);
@@ -58,6 +83,24 @@ class Controller extends BaseController {
 		//ButtonReleased::dispatch($device);
 		MotionDetected::dispatch($device);
 		//\App\Events\Room\StateChanged::dispatch(Room::find(4));*/
+	}
+
+	protected static function packByte($data): string {
+		return str_pad(dechex($data), 2, '0', STR_PAD_LEFT);
+		//return '0x' . dechex($data);
+	}
+
+	protected static function packBytes($data): string {
+		$high = $data>>8;
+		$low = $data & 0xff;
+		return self::packByte($high) . ' ' . self::packByte($low);
+		return str_pad(dechex($data), 2, '0', STR_PAD_LEFT);
+		//return '0x' . dechex($data);
+	}
+
+	protected static function splitBytes(&$bytes, $data) {
+		$bytes[] = $data>>8;
+		$bytes[] = $data & 0xff;
 	}
 
 }

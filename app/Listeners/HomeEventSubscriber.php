@@ -4,7 +4,9 @@ namespace App\Listeners;
 
 use App\Custom\Contracts\InteractsWithScenario;
 use App\Enums\Scenario\CommandType;
+use App\Home\DeviceFactory;
 use App\Home\Home;
+use App\Home\Room as HomeRoom;
 use App\Models\Home\Device;
 use App\Models\Home\Room;
 use App\Notifications\MailEventNotification;
@@ -50,12 +52,12 @@ class HomeEventSubscriber {
 				break;
 
 			case Room::class:
-				home()->room($command->entity_id)
-					->command($command->command, $command->data);
+				$room = HomeRoom::factory($command->entity_id);
+				$room->command($command->command, $command->data);
 				break;
 			case Device::class:
 				//if (isset(self::$devicesCache[$data['entity_id']]) && self::$devicesCache[$data['entity_id']] === $data['command'])
-				$device = home()->device($command->entity_id);
+				$device = DeviceFactory::find($command->entity_id);
 				//self::$devicesCache[$device->id] = $data->command;
 				$device->command($command->command, $command->data);
 				break;

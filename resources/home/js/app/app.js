@@ -8,4 +8,4 @@ Object.assign(window, {
 });
 
 import "../plugins/touch-hold"
-import "../plugins/touchSlider"
+import "../plugins/touch-slider"

@@ -76,6 +76,10 @@ class Device extends Model {
 		return (string)$this->name;
 	}
 
+	public function isLight(): bool {
+		return $this->group == DeviceGroup::LIGHT;
+	}
+
 	public function room() {
 		return Room::find($this->room_id);
 	}

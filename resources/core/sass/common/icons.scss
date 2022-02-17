@@ -25,15 +25,20 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-
+.icon-logout:before {
+	content: "\e909";
+}
 .icon-humidity:before {
 	content: "\e910";
 }
 .icon-temperature:before {
 	content: "\e911";
 }
-.icon-cinema:before {
+.icon-sign-out:before {
 	content: "\e912";
+}
+.icon-cinema:before {
+	content: "\e91b";
 }
 .icon-day:before {
 	content: "\e913";
@@ -46,6 +51,12 @@
 }
 .icon-sleep:before {
 	content: "\e916";
+}
+.icon-projector-screen:before {
+	content: "\e91c";
+}
+.icon-projector:before {
+	content: "\e91d";
 }
 .icon-wc:before {
 	content: "\e919";
@@ -76,9 +87,6 @@
 }
 .icon-molding_light:before {
 	content: "\e908";
-}
-.icon-projector_screen:before {
-	content: "\e909";
 }
 .icon-spot_light:before {
 	content: "\e90c";

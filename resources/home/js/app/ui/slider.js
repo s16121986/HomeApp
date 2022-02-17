@@ -37,7 +37,7 @@ export default class Slider {
 
 		const self = this;
 		const el = $('<div class="ui-control control-slider">'
-			+ '<div class="icon off" title="Выкл"></div>'
+			+ '<div class="icon off" title="1%"></div>'
 			+ '<div class="slider"></div>'
 			+ '<div class="icon on" title="100%"></div>'
 			//+ '<div class="value">100%</div>'
@@ -56,7 +56,7 @@ export default class Slider {
 			.mousedown((e) => { e.stopPropagation(); })
 			.click(function () { self.slide(+$(this).data('value')); });
 
-		el.find('div.off').click(() => { this.trigger('change', 0); });
+		el.find('div.off').click(() => { this.slide(0); });
 		el.find('div.on').click(() => { this.slide(100); });
 
 		const onchange = (action, ui) => {

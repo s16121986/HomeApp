@@ -1,13 +1,13 @@
 #!/usr/bin/env php
 <?php
 define('LARAVEL_START', microtime(true));
-define('ROOT_PATH', realpath(__DIR__ . '/../'));
+define('ROOT_PATH', realpath(__DIR__ . '/../../'));
 const APP_SCRIPT = 'socket';
 
 require ROOT_PATH . '/vendor/autoload.php';
 
 use Workerman\Worker;
-use App\Broadcaster\Notifier\Kernel;
+use App\Daemon\Kernel;
 use App\Events\Broadcasting\WebSocketEvent;
 use App\Listeners\WebSocketEventSubscriber;
 
@@ -20,7 +20,15 @@ $eventsListener = new WebSocketEventSubscriber();
 
 $connections = [];
 
-$wsWorker = new Worker('websocket://localhost:61523');
+/*$context = array(
+	'ssl' => array(
+		'local_cert'  => '/etc/letsencrypt/live/smarthome.hfgh.ru/privkey.pem',
+		'local_pk'    => '/etc/letsencrypt/live/smarthome.hfgh.ru/server.key',
+		'verify_peer' => false,
+	)
+);*/
+
+$wsWorker = new Worker('websocket://localhost:61521');
 
 // 4 processes
 //$wsWorker->count = 4;
@@ -65,7 +73,6 @@ $wsWorker->onClose = function ($connection) use (&$connections) {
 	// удаляем параметр при отключении пользователя
 	$index = array_search($connection, $connections);
 	unset($connections[$index]);
-
 };
 
 // Run worker

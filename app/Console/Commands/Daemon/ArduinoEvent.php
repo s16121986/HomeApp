@@ -13,38 +13,42 @@ use stdClass;
 
 class ArduinoEvent extends Command {
 
-	const EVENT_INIT = 1;
+	//const EVENT_INIT = 1;
 	//const EVENT_BUTTON_HOLD = 10; //deprecated
-	const EVENT_BUTTON_PRESS = 11;
-	const EVENT_BUTTON_RELEASE = 12;
-	const EVENT_BUTTON_HOLD = 13;
-	const EVENT_SENSOR_STATE = 14;
-	const EVENT_MOTION_DETECT = 15;
+	const EVENT_BUTTON_PRESS = 1;
+	const EVENT_BUTTON_RELEASE = 2;
+	const EVENT_BUTTON_HOLD = 3;
+	//const EVENT_SENSOR_STATE = 14;
+	//const EVENT_MOTION_DETECT = 15;
 
 	protected $signature = 'arduino:event
+		{--address= : Data}
 		{--pin= : Arduino pin}
-		{--event= : Event}
-		{--data= : Data}';
+		{--event= : Event}';
 
 	protected $description = '';
 
 	public function handle() {
 		$data = new stdClass();
+		$data->address = $this->option('address');
 		$data->pin = $this->option('pin');
-		$data->event = $this->option('event');
-		$data->data = $this->option('data');
+		$data->event = (int)$this->option('event');
+		//$data->data = $this->option('data');
 		if (!$data->pin)
 			return $this->error('Pin argument required');
 
 		//EventManager::event($data);
-		if ($data->pin == home()->pin)
-			return self::homeEvent($data);
+		//if ($data->pin == home()->pin)
+		//	return self::homeEvent($data);
 
-		$device = Device::findByPin($data->pin);
-		if (!$device)
-			return $this->error('Device [pin=' . $data->pin . '] not found');
+		$device = Device::where('module_id', 1)
+			->where('channel', $data->pin)
+			->whereEnabled()
+			->first();
+		//if (!$device)
+		//	return $this->error('Device [pin=' . $data->pin . '] not found');
 
-		if ($device->enabled)
+		if ($device)
 			self::deviceEvent($data, $device);
 	}
 
@@ -67,12 +71,12 @@ class ArduinoEvent extends Command {
 			case self::EVENT_BUTTON_HOLD:
 				ButtonHolded::dispatch($device);
 				break;
-			case self::EVENT_SENSOR_STATE:
+			/*case self::EVENT_SENSOR_STATE:
 				SensorState::dispatch($device, $data->data);
 				break;
 			case self::EVENT_MOTION_DETECT:
 				MotionDetected::dispatch($device);
-				break;
+				break;*/
 		}
 	}
 
