@@ -142,8 +142,7 @@ class ActionController extends Controller {
 
 		return $action
 			->title($titlePrefix . ' / Новый сценарий')
-			->script('action/edit')
-			//->view('action.form')
+			->script('action/edit')//->view('action.form')
 			;
 	}
 
@@ -204,6 +203,19 @@ class ActionController extends Controller {
 				'required' => true,
 				'items' => self::getConditions(),
 				'emptyItem' => ''
+			])
+			->addElement('expression', 'select', [
+				'label' => 'Выражение',
+				'required' => true,
+				'items' => [
+					'=' => 'Равно',
+					'!=' => 'Не равно',
+					'>' => 'Больше',
+					'<' => 'Меньше',
+					//'between' => 'Интервал',
+					'in' => 'Одно из',
+					'not in' => 'Ни одно из'
+				]
 			])
 			->addElement('data', 'hidden', []);
 

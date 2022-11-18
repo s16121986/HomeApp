@@ -50,7 +50,7 @@ class Request {
 		$cmd .= ' -x "' . self::pack(func_get_args()) . '"';
 
 		//\DB::table('api_log')->insert(['request' => $cmd]);
-		//var_dump($cmd);exit;
+		//dd($cmd);
 
 		return new Response(shell_exec($cmd));
 	}

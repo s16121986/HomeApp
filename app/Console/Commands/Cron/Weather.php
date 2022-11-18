@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands\Cron;
 
+use App\Enums\DayTime;
+use App\Events\Home\DayTimeChanged;
 use App\Events\Home\Nightfall;
 use App\Events\Home\Sunrise;
 use App\Models\Home\Sensors;
@@ -19,27 +21,40 @@ class Weather extends Command {
 		$data = YandexWeather::getWeather();
 		$fact = $data->fact;
 		//var_dump($fact);
-		$daytime = Sensors::where('name', 'daytime')->value('value');
 		$assoc = [
 			'temp' => 'temperature',
 			'humidity' => 'humidity',
-			'daytime' => 'daytime'
+			//'daytime' => 'daytime'
 		];
 		foreach ($assoc as $k => $n) {
-			Sensors::where('name', $n)
-				->update(['value' => $fact->$k]);
+			static::updateValue($n, $fact->$k);
 		}
 
-		if ($fact->daytime !== $daytime) {
-			switch ($fact->daytime) {
-				case 'd':
-					Sunrise::dispatch();
-					break;
-				case 'n':
-					Nightfall::dispatch();
-					break;
-			}
+		$daytime = Sensors::where('name', 'daytime')->value('value');
+		//$d = $fact->daytime;
+		$d = static::calculateDateTime();
+		if ($d !== $daytime) {
+			DayTimeChanged::dispatch();
+
+			static::updateValue('daytime', $d);
 		}
+	}
+
+	private static function updateValue($n, $v) {
+		Sensors::where('name', $n)
+			->update(['value' => $v]);
+	}
+
+	private static function calculateDateTime(): string {
+		$h = +date('G');
+		if ($h >= 0 && $h < 8)
+			return DayTime::NIGHT;
+		else if ($h < 12)
+			return DayTime::MORNING;
+		else if ($h < 18)
+			return DayTime::DAY;
+		else
+			return DayTime::EVENING;
 	}
 
 }

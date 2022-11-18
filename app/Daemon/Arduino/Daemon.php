@@ -7,8 +7,7 @@ use App\Events\Sensors\ButtonPressed;
 use App\Events\Sensors\ButtonReleased;
 use App\Events\Sensors\MotionDetected;
 use App\Models\Home\Device;
-
-//use Arduino as ArduinoPort;
+use Illuminate\Support\Facades\DB;
 use Exception;
 
 class Daemon {
@@ -106,6 +105,12 @@ class Daemon {
 			if (!isset($this->devices[$pin]))
 				continue;
 
+			/*static::log(1, $event, $content, json_encode([
+				'address' => self::byte($content, 1),
+				'pin' => $pin,
+				'event' => $event
+			]));*/
+
 			self::deviceEvent($event, $this->devices[$pin]);
 		}
 
@@ -134,6 +139,16 @@ class Daemon {
 				MotionDetected::dispatch($device);
 				break;
 		}
+	}
+
+	private static function log($portId, $type, $s, $data = null) {
+		DB::table('serial_port_log')
+			->insert([
+				'port_id' => $portId,
+				'type' => $type,
+				'input' => $s,
+				'data' => $data
+			]);
 	}
 
 }

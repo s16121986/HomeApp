@@ -96,8 +96,16 @@ export default class ConditionField {
 				}
 				this.#data.addSelect('time', 'Время', hours);
 				break;
+			case 'App\\Entities\\Scenario\\Condition\\TimeMeridian':
+				this.#data.addSelect('meridian', 'Время', [{id: 'am', name: 'День'}, {id: 'pm', name: 'Вечер'}]);
+				break;
 			case 'App\\Entities\\Scenario\\Condition\\DayTime':
-				this.#data.addSelect('daytime', 'Время', [{id: 'd', name: 'День'}, {id: 'n', name: 'Ночь'}]);
+				this.#data.addSelect('daytime', 'Время', [
+					{id: 'm', name: 'Утро'},
+					{id: 'd', name: 'День'},
+					{id: 'e', name: 'Вечер'},
+					{id: 'n', name: 'Ночь'}
+				]);
 				break;
 			default:
 				this.#data.hide();

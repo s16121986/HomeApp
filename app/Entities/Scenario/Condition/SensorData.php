@@ -8,7 +8,7 @@ class SensorData extends AbstractCondition {
 
 	public function handle(): bool {
 		$device = Device::find($this->device_id);
-		return $device->data == $this->data;
+		return $this->compare($device->data, $this->data);
 	}
 
 }

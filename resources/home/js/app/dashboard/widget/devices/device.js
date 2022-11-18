@@ -49,7 +49,7 @@ export default class Device extends Container {
 
 			this.command('toggle');
 
-			this.click();
+			//this.click();
 		});
 	}
 

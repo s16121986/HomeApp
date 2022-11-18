@@ -22,6 +22,7 @@
 				<?php foreach ($conditions as $condition) { ?>
 				<tr>
 					<td><?=lang($condition->type)?></td>
+					<td><?=$condition->expression?></td>
 					<td><?=$condition->data?></td>
 					<td class="column-edit"><a href="#" data-id="<?=$condition->id?>" class="ui-btn btn-edit"></a></td>
 				</tr>

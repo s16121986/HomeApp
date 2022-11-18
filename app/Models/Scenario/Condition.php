@@ -20,6 +20,7 @@ class Condition extends Model {
 	protected $fillable = [
 		'action_id',
 		'type',
+		'expression',
 		'data',
 	];
 

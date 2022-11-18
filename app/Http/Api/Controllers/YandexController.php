@@ -91,6 +91,21 @@ class YandexController extends Controller {
 		];
 	}
 
+	public function test() {
+		return [];
+		$data = '{"payload":{"devices":[{"id":"47","capabilities":[{"type":"devices.capabilities.on_off","state":{"instance":"on","value":true}}]}]}}';
+		$data = json_decode($data);
+
+		$devices = [];
+		foreach ($data->payload->devices as $r) {
+			$device = self::getDevice($r->id);
+			if (!$device)
+				continue;
+			$device->command($r->capabilities);
+		}
+		return [];
+	}
+
 	private static function getDevice($id) {
 		$homeDevice = Device::find($id);
 		if (!$homeDevice->enabled || !$homeDevice->ya_enabled)

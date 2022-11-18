@@ -2,6 +2,7 @@
 
 namespace App\Home;
 
+use App\Enums\DayTime;
 use App\Models\Home\Device;
 use App\Models\Home\Sensors;
 use App\Models\Home\Settings;
@@ -106,6 +107,13 @@ class Home {
 
 	public function sensor($key) {
 		return $this->sensors()->$key;
+	}
+
+	public function getTimeMeridian(): string {
+		return match (static::getDaytime()) {
+			DayTime::MORNING, DayTime::DAY => 'am',
+			default => 'pm',
+		};
 	}
 
 	public function getDaytime() {

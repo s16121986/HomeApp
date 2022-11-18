@@ -2,12 +2,16 @@
 
 namespace App\Http\Admin\Controllers;
 
+use App\Events\Sensors\ButtonPressed;
+use App\Models\Home\Device;
 use App\Models\Scenario\Scenario;
 use Illuminate\Http\Request;
 
 class ScenarioController extends Controller {
 
 	public function index() {
+		//$device = Device::find(22);
+		//ButtonPressed::dispatch($device);
 		return $this->layout('scenario.index', [
 			'title' => 'Сценарии',
 			'script' => 'scenario/index',

@@ -8,7 +8,7 @@ class RoomState extends AbstractCondition {
 
 	public function handle(): bool {
 		$room = Room::find($this->room_id);
-		return $room->light_state == (int)$this->state;
+		return $this->compare($room->light_state, $this->state);
 	}
 
 }

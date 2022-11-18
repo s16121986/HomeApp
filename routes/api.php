@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Api\Controllers\YandexController;
 use App\Http\Api\Middleware\YandexAuth;
 use App\Http\Api\Middleware\YandexVersion;
 use Illuminate\Http\Request;
@@ -28,12 +29,13 @@ Route::prefix('yandex/{version}')
 	->where(['version' => 'v\d\.\d'])
 	->middleware([YandexAuth::class])
 	->group(function () {
-		$yandexController = 'App\Http\Api\Controllers\YandexController';
-
-		Route::get('/', [$yandexController, 'ping']);
-		Route::get('/user/unlink', [$yandexController, 'unlink']);
-		Route::get('/user/devices', [$yandexController, 'devices']);
-		Route::post('/user/devices/query', [$yandexController, 'query']);
-		Route::post('/user/devices/action', [$yandexController, 'state']);
-		//	Route::get('/d', [$yandexController, 'ping']);
+		$controller = YandexController::class;
+		Route::get('/', $controller . '@ping');
+		Route::get('/user/unlink', $controller . '@unlink');
+		Route::get('/user/devices', $controller . '@devices');
+		Route::post('/user/devices/query', $controller . '@query');
+		Route::post('/user/devices/action', $controller . '@state');
+		//	Route::get('/d', 'ping']);
 	});
+
+Route::get('/test', YandexController::class . '@test');
