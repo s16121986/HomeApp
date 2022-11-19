@@ -25,4 +25,8 @@ class Sensors extends Model {
 		'value',
 	];
 
+	public static function value($name) {
+		return static::where('name', $name)->value('value');
+	}
+
 }

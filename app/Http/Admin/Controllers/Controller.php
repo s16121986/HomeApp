@@ -67,7 +67,7 @@ class Controller extends BaseController {
 	}
 
 	public function index() {
-		dd('4');
+		return redirect(route('device.index'));
 	}
 
 	public function layout($view, array $data = []) {

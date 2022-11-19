@@ -1,6 +1,7 @@
 <?php
 
 use App\Home\Home;
+use App\Home\Settings\Events;
 use App\Services\IO\Com\ArduinoSerial;
 
 function lang($key): string {
@@ -13,4 +14,8 @@ function home(): Home {
 
 function port() {
 	return ArduinoSerial::getInstance();
+}
+
+function events_enabled($eventsSettings): bool {
+	return Events::value() && $eventsSettings::value();
 }

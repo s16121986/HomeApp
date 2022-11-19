@@ -10,8 +10,8 @@ use Illuminate\Http\Request;
 class ScenarioController extends Controller {
 
 	public function index() {
-		//$device = Device::find(22);
-		//ButtonPressed::dispatch($device);
+		$device = Device::find(22);
+		ButtonPressed::dispatch($device);
 		return $this->layout('scenario.index', [
 			'title' => 'Сценарии',
 			'script' => 'scenario/index',

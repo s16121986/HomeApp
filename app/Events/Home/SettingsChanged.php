@@ -2,17 +2,19 @@
 
 namespace App\Events\Home;
 
-use App\Models\Home\Room;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class StateChanged implements ShouldBroadcast {
+class SettingsChanged implements ShouldBroadcast {
 
 	use Dispatchable, InteractsWithSockets;
 
-	public function __construct() {
+	private $setting;
+
+	public function __construct($setting) {
+		$this->setting = $setting;
 	}
 
 	public function broadcastWhen(): bool {
@@ -25,13 +27,13 @@ class StateChanged implements ShouldBroadcast {
 
 	public function broadcastWith() {
 		return [
-			'home' => Room::home()->toArray(),
-			//'settings' => Settings::getData()
+			'name' => $this->setting->id,
+			'value' => $this->setting->value()
 		];
 	}
 
 	public function broadcastAs() {
-		return 'home.stateChanged';
+		return 'home.settingsChanged';
 	}
 
 }

@@ -2,10 +2,9 @@
 
 namespace App\Daemon\Arduino;
 
-use App\Events\Sensors\ButtonHolded;
-use App\Events\Sensors\ButtonPressed;
-use App\Events\Sensors\ButtonReleased;
-use App\Events\Sensors\MotionDetected;
+use App\Events\Sensors as SensorsEvents;
+use App\Home\Sensors;
+use App\Home\Settings;
 use App\Models\Home\Device;
 use Illuminate\Support\Facades\DB;
 use Exception;
@@ -93,6 +92,9 @@ class Daemon {
 		while (true) {
 			$content = fread($h, 5);
 
+			if (!Settings\Events::value())
+				continue;
+
 			if (self::byte($content, 0) !== 62 || self::byte($content, 4) !== 255) {
 				echo "broken\n";
 				continue;
@@ -102,7 +104,7 @@ class Daemon {
 			$pin = self::byte($content, 2);
 			$event = self::byte($content, 3);
 
-			if (!isset($this->devices[$pin]))
+			if (!isset($this->devices[$pin]) || !static::isEventEnabled($this->devices[$pin]))
 				continue;
 
 			/*static::log(1, $event, $content, json_encode([
@@ -127,18 +129,26 @@ class Daemon {
 	public static function deviceEvent($event, $device) {
 		switch ($event) {
 			case 1:
-				ButtonPressed::dispatch($device);
+				SensorsEvents\ButtonPressed::dispatch($device);
 				break;
 			case 2:
-				ButtonReleased::dispatch($device);
+				SensorsEvents\ButtonReleased::dispatch($device);
 				break;
 			case 3:
-				ButtonHolded::dispatch($device);
+				SensorsEvents\ButtonHolded::dispatch($device);
 				break;
-			case 4:
+			/*case 4:
 				MotionDetected::dispatch($device);
-				break;
+				break;*/
 		}
+	}
+
+	private static function isEventEnabled($device): bool {
+		return match ($device->type) {
+			Sensors\Button::class => Settings\ButtonEvents::value(),
+			Sensors\Motion::class => Settings\MotionEvents::value(),
+			default => true,
+		};
 	}
 
 	private static function log($portId, $type, $s, $data = null) {

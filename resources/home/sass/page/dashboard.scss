@@ -29,7 +29,7 @@ header button svg {width: 16px;height: 16px;vertical-align: top;}
 }
 
 .widget {}
-.widget-wrap {display: flex;flex-direction: column;position: relative;border-radius: 8px;padding: 8px;min-height: 96px;min-width: 96px;box-shadow: $shadow;cursor: pointer;height: 100%;background-color: #fff;}
+.widget-wrap {display: flex;flex-direction: column;position: relative;border-radius: 8px;padding: 8px;min-width: 96px;box-shadow: $shadow;cursor: pointer;height: 100%;background-color: #fff;}
 .widget-body {position: relative;flex-grow: 1;z-index: 2;display: flex;}
 .widget .ui-switch {border-radius: 8px;width: 32px;height: 16px; padding: 3px;position: absolute;top: 0;right: 0;}
 .widget .ui-switch:before {width: 10px; height: 10px;}
@@ -42,6 +42,7 @@ header button svg {width: 16px;height: 16px;vertical-align: top;}
 @import "../dashboard/control/slider";
 @import "../dashboard/activity/home";
 @import "../dashboard/activity/room";
+@import "../dashboard/activity/settings";
 @import "../dashboard/widget/room";
 @import "../dashboard/widget/device";
 @import "../dashboard/widget/time";

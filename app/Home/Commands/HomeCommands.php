@@ -4,9 +4,8 @@ namespace App\Home\Commands;
 
 use App\Events\Home\StateChanged;
 use App\Home\DeviceFactory;
+use App\Home\Settings\LightsState;
 use App\Models\Home\Device;
-use App\Models\Home\Settings;
-use App\Observers\Home\DeviceObserver;
 
 class HomeCommands extends AbstractCommands {
 
@@ -15,8 +14,7 @@ class HomeCommands extends AbstractCommands {
 	}
 
 	public function lightOn() {
-		$lights = Settings::where('name', 'lights')->value('value');
-		$lights = $lights ? json_decode($lights) : [];
+		$lights = LightsState::value();
 		//var_dump($lights);
 
 		//DeviceObserver::setRoomEventsEnabled(false);
@@ -38,8 +36,7 @@ class HomeCommands extends AbstractCommands {
 			->toArray();
 		//var_dump($lights);
 
-		Settings::where('name', 'lights')
-			->update(['value' => json_encode($lights)]);
+		LightsState::change($lights);
 
 		//DeviceObserver::setRoomEventsEnabled(false);
 
@@ -60,6 +57,10 @@ class HomeCommands extends AbstractCommands {
 			$this->lightOff();
 		else
 			$this->lightOn();
+	}
+
+	public function changeSettings($data) {
+		home()->settings()->setValue($data->name, $data->value);
 	}
 
 }

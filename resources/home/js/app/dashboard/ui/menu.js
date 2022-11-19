@@ -15,7 +15,7 @@ export default class Menu {
 		html += '<div data-id="home" class="a home">' + icons.home + '</div>';
 		html += '<div data-id="rooms" class="a rooms">' + icon('room') + '</div>';
 		//html += '<button class="power-off"><div class="wrap">' + icons.powerOff + '</div></button>';
-		html += '<div data-id="sensors" class="a sensors">' + icon('thermometer') + '</div>';
+		html += '<div data-id="settings" class="a settings">' + icon('settings') + '</div>';
 		//html += '<div data-id="settings" class="settings">' + icons.settings + '</div>';
 		html += '<div data-id="menu" class="menu">' + icons.menu + '</div>';
 		html += '</div>';

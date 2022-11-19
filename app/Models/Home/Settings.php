@@ -26,14 +26,4 @@ class Settings extends Model {
 		'value',
 	];
 
-	public static function getData(): array {
-		$settings = [];
-		foreach (Settings::get() as $r) {
-			$settings[$r->name] = $r->value;
-		}
-		$settings['lights'] = json_decode($settings['lights']);
-
-		return $settings;
-	}
-
 }

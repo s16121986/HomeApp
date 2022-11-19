@@ -1,6 +1,6 @@
 import Home from "../activity/home";
 import Rooms from "../activity/rooms";
-import Sensors from "../activity/sensors";
+import Settings from "../activity/settings";
 
 export default class Activities {
 	#el;
@@ -12,7 +12,7 @@ export default class Activities {
 		this.#items = [
 			new Home(),
 			new Rooms(),
-			new Sensors(),
+			new Settings(),
 			//new Settings()
 		];
 	}

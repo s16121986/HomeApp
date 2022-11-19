@@ -1,0 +1,11 @@
+div.activity-settings {
+	max-width: 480px;
+	margin: 0 auto;
+	padding-top: 16px;
+	div.widget {padding: 8px;}
+	div.widget-toggle {line-height: 16px;font-weight: 500;letter-spacing: 0.4px;color: #393D3F;font-size: 11px;flex-grow: 1;width: 100%;}
+	div.widget-toggle.disabled {opacity: .6;}
+	div.widget-toggle .ui-switch {top: 8px;right: 8px;}
+
+	.widgets-group > .group-body {flex-wrap: wrap;}
+}

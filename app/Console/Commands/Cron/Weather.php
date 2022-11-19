@@ -4,8 +4,7 @@ namespace App\Console\Commands\Cron;
 
 use App\Enums\DayTime;
 use App\Events\Home\DayTimeChanged;
-use App\Events\Home\Nightfall;
-use App\Events\Home\Sunrise;
+use App\Home\Settings\CronEvents;
 use App\Models\Home\Sensors;
 use App\Services\Yandex\Weather as YandexWeather;
 use Illuminate\Console\Command;
@@ -34,7 +33,8 @@ class Weather extends Command {
 		//$d = $fact->daytime;
 		$d = static::calculateDateTime();
 		if ($d !== $daytime) {
-			DayTimeChanged::dispatch();
+			if (events_enabled(CronEvents::class))
+				DayTimeChanged::dispatch();
 
 			static::updateValue('daytime', $d);
 		}
@@ -47,9 +47,9 @@ class Weather extends Command {
 
 	private static function calculateDateTime(): string {
 		$h = +date('G');
-		if ($h >= 0 && $h < 8)
+		if ($h >= 0 && $h < 7)
 			return DayTime::NIGHT;
-		else if ($h < 12)
+		else if ($h <= 12)
 			return DayTime::MORNING;
 		else if ($h < 18)
 			return DayTime::DAY;

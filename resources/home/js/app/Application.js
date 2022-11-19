@@ -25,6 +25,7 @@ class Application {
 			})
 			.onMessage('room.stateChanged', (result) => { home().room(result.id).updateData(result); })
 			.onMessage('device.stateChanged', (result) => { home().device(result.id).updateData(result); })
+			.onMessage('home.settingsChanged', (result) => { home().settings().updateValue(result); })
 			.onMessage('home.stateRefresh', (result) => { home().stateRefresh(result); });
 	}
 }

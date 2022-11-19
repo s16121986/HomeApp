@@ -9,11 +9,9 @@ use App\Home\Room;
 use App\Models\Home\Room as RoomModel;
 use App\Models\Home\Device;
 use App\Models\Home\Sensors;
-use App\Models\Home\Settings;
 use App\Models\Scenario\Scenario;
 use App\Notifications\MailEventNotification;
 use App\Observers\Home\DeviceObserver;
-use App\Repositories\HomeRepository;
 
 class WebSocketEventSubscriber {
 
@@ -36,8 +34,8 @@ class WebSocketEventSubscriber {
 				->where('home_devices.usable', 1)
 				->get()->toArray(),
 			'scenarios' => Scenario::whereEnabled()->get()->toArray(),
-			'sensors' => Sensors::get()->toArray()
-			//'settings' => Settings::getData()
+			'sensors' => Sensors::get()->toArray(),
+			'settings' => home()->settings()->getData()
 		];
 	}
 

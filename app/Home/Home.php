@@ -5,9 +5,9 @@ namespace App\Home;
 use App\Enums\DayTime;
 use App\Models\Home\Device;
 use App\Models\Home\Sensors;
-use App\Models\Home\Settings;
 use App\Repositories\HomeRepository;
 use App\Home\Commands\HomeCommands;
+use App\Repositories\SettingsRepository;
 use stdClass;
 
 class Home {
@@ -19,8 +19,6 @@ class Home {
 	private $devices;
 
 	private $rooms;
-
-	private $sensorsData;
 
 	private $settings;
 
@@ -38,6 +36,7 @@ class Home {
 	protected function __construct() {
 		$this->home = HomeRepository::home();
 		$this->commands = new HomeCommands();
+		$this->settings = new SettingsRepository();
 	}
 
 	public function __get(string $name) {
@@ -81,32 +80,8 @@ class Home {
 		return null;
 	}
 
-	public function settings(): stdClass {
-		if (null !== $this->settings)
-			return $this->settings;
-
-		$this->settings = new stdClass();
-		foreach (Sensors::get() as $r) {
-			$this->settings->{$r->name} = $r->value;
-		}
-
+	public function settings(): SettingsRepository {
 		return $this->settings;
-	}
-
-	public function sensors(): stdClass {
-		if (null !== $this->sensorsData)
-			return $this->sensorsData;
-
-		$this->sensorsData = new stdClass();
-		foreach (Sensors::get() as $r) {
-			$this->sensorsData->{$r->name} = $r->value;
-		}
-
-		return $this->sensorsData;
-	}
-
-	public function sensor($key) {
-		return $this->sensors()->$key;
 	}
 
 	public function getTimeMeridian(): string {
@@ -117,7 +92,7 @@ class Home {
 	}
 
 	public function getDaytime() {
-		return $this->sensors()->daytime;
+		return Sensors::value('daytime');
 	}
 
 	public function hasActiveLights() {

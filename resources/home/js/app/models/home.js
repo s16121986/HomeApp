@@ -4,6 +4,7 @@ import Device, {DEVICE_GROUPS} from "./device";
 import Sensor from "./sensor";
 import Room from "./room";
 import Scenario from "./scenario";
+import Settings from "./settings";
 
 class Home {
 	static #instance;
@@ -17,6 +18,7 @@ class Home {
 	#devices;
 	#sensors;
 	#scenarios;
+	#settings;
 
 	constructor() {
 		this.#rooms = new Collection();
@@ -43,6 +45,7 @@ class Home {
 
 		data.scenarios.forEach(r => { this.#scenarios.add(new Scenario(r)); });
 
+		this.#settings = new Settings(data.settings);
 		//sensorsData.setData(params.data);
 		//settings.update(params.settings);
 
@@ -67,6 +70,7 @@ class Home {
 
 		data.rooms.forEach(r => { self.#rooms.get(r.id).updateData(r, false); });
 
+		this.#settings.updateData(data.settings);
 		//sensorsData.update(data.data);
 		//settings.update(data.settings);
 
@@ -79,10 +83,6 @@ class Home {
 
 	get(name) { return this.#data[name]; }
 
-	getData() { return sensorsData; }
-
-	getSettings() { return settings; }
-
 	room(key) { return this.#rooms.find(r => { return r.key === key || r.id === +key; }); }
 
 	rooms() { return this.#rooms; }
@@ -94,6 +94,8 @@ class Home {
 	sensors() { return this.#sensors; }
 
 	scenarios() { return this.#scenarios; }
+
+	settings() { return this.#settings; }
 
 	command(action, data) {
 		broadcaster().send({
