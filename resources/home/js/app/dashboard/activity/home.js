@@ -64,7 +64,7 @@ export default class Home extends Container {
 		});
 		el.append(favorites.el);
 
-		let a = [];
+		/*let a = [];
 		home().sensors()
 			//.filter(sensor => sensor.favorite)
 			.forEach(sensor => { a[a.length] = widgetSensor(sensor, {}); })
@@ -74,7 +74,7 @@ export default class Home extends Container {
 			slider: true,
 			widgets: a
 		});
-		el.append(sensors.el);
+		el.append(sensors.el);*/
 
 		const active = new ActiveGroup({
 			cls: 'devices-group',

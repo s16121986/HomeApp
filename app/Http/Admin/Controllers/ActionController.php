@@ -18,12 +18,13 @@ use Exception;
 class ActionController extends Controller {
 
 	public function index() {
-		return $this->layout('action.index', [
-			'title' => 'Команды',
-			'script' => 'action/index',
-			'rooms' => HomeRepository::rooms(),
-			'items' => Action::get()
-		]);
+		return app('layout')
+			->title('Команды')
+			->script('action/index')
+			->view('action.index', [
+				'rooms' => HomeRepository::rooms(),
+				'items' => Action::get()
+			]);
 	}
 
 	public function view(Request $request, $id) {
@@ -51,14 +52,15 @@ class ActionController extends Controller {
 		$this->meta->head
 			->addMetaName('metadata', htmlspecialchars(json_encode($metadata)));
 
-		return $this->layout('action.view', [
-			'title' => $action->name,
-			'style' => 'action/view',
-			'action' => $action,
-			'conditions' => $action->conditions(),
-			'commands' => $action->commands(),
-			'data' => $data
-		]);
+		return app('layout')
+			->title($action->name)
+			->ss('action/view')
+			->view('action.view', [
+				'action' => $action,
+				'conditions' => $action->conditions(),
+				'commands' => $action->commands(),
+				'data' => $data
+			]);
 	}
 
 	public function edit(Request $request, $id) {
@@ -133,8 +135,7 @@ class ActionController extends Controller {
 			//'conditions' => self::getConditions(),
 		];
 
-		$this->meta->head
-			->addMetaName('metadata', htmlspecialchars(json_encode($metadata)));
+		app('layout')->addMetaVariable('metadata', $metadata);
 
 		$titlePrefix = '';/*match ($entity::class) {
 			Device::class => $entity->room_name . ' / ' . $entity->name

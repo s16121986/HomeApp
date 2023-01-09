@@ -22,10 +22,6 @@ class Controller extends BaseController {
 
 	use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-	public function __construct() {
-		View::addLocation(resource_path('home/views'));
-	}
-
 	public function index() {
 		return view('dashboard', [
 			'meta' => MetaService::instance()->configure([
@@ -91,7 +87,7 @@ class Controller extends BaseController {
 	}
 
 	protected static function packBytes($data): string {
-		$high = $data>>8;
+		$high = $data >> 8;
 		$low = $data & 0xff;
 		return self::packByte($high) . ' ' . self::packByte($low);
 		return str_pad(dechex($data), 2, '0', STR_PAD_LEFT);
@@ -99,7 +95,7 @@ class Controller extends BaseController {
 	}
 
 	protected static function splitBytes(&$bytes, $data) {
-		$bytes[] = $data>>8;
+		$bytes[] = $data >> 8;
 		$bytes[] = $data & 0xff;
 	}
 

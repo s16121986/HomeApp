@@ -38,6 +38,7 @@ class Kernel extends HttpKernel {
 		],
 
 		'api' => [
+			\App\Http\Api\Middleware\DebugMode::class,
 			//'throttle:api',
 			//\Illuminate\Routing\Middleware\SubstituteBindings::class,
 		],

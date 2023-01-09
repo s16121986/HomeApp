@@ -35,7 +35,7 @@ class RouteServiceProvider extends ServiceProvider {
 	 */
 	public function boot() {
 		Route::pattern('id', '[0-9]+');
-
+		dd(123);
 		switch (APP_SCRIPT) {
 			case 'web_home':
 				return $this->mapWebRoutes();

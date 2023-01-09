@@ -1,0 +1,17 @@
+@import "../main";
+
+div.widget-modbus {flex-basis: 90% !important;}
+div.widget-modbus div.fieldset-wrap {display: flex;margin-bottom: 16px;}
+div.widget-modbus fieldset {flex-grow: 1;border-radius: 4px;}
+div.widget-modbus fieldset:first-child {margin-right: 16px;}
+div.widget-modbus div.btn-wrap {text-align: right;}
+div.widget-modbus button {height: 26px;}
+div.widget-modbus div.log {border: 1px solid $color-border;background: $color-background;padding: 16px;border-radius: 4px;white-space: pre;line-height: 18px;letter-spacing: 0.8px;overflow: auto;}
+div.widget-modbus div.log {margin-top: 16px;}
+div.widget-modbus div.form-field {display: flex;}
+div.widget-modbus div.form-field:not(:last-child) {margin-bottom: 16px;}
+div.widget-modbus label {margin-right: 16px;flex-grow: 1;padding: 5px 0;line-height: 16px;}
+div.widget-modbus input[type="text"],
+div.widget-modbus select {height: 26px;border-radius: 3px;border: 1px solid $color-border;padding: 0 8px;}
+div.widget-modbus input[type="text"] {text-align: right;width: 80px;}
+div.widget-modbus select {width: 140px;}

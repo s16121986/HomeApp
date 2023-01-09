@@ -12,12 +12,13 @@ use Illuminate\Http\Request;
 class DeviceController extends Controller {
 
 	public function index() {
-		return $this->layout('device.index', [
-			'title' => 'Устройства',
-			'script' => 'device/index',
-			'rooms' => HomeRepository::rooms(),
-			'devices' => Device::orderBy('name')->get()
-		]);
+		return app('layout')
+			->title('Устройства')
+			->script('device/index')
+			->view('device.index', [
+				'rooms' => HomeRepository::rooms(),
+				'devices' => Device::orderBy('name')->get()
+			]);
 	}
 
 	public function edit(Request $request, $id) {
@@ -75,13 +76,14 @@ class DeviceController extends Controller {
 		$data['module'] = $foreignParam('module');
 		$data['type'] = $foreignParam('type');
 
-		return $this->layout('device.view', [
-			'title' => $device->room_name . ' / ' . $device->name,
-			'style' => 'device/view',
-			'device' => $device,
-			'data' => $data,
-			'actions' => Action::whereParent($device)->get()
-		]);
+		return app('layout')
+			->title($device->room_name . ' / ' . $device->name)
+			->ss('device/view')
+			->view('device.view', [
+				'device' => $device,
+				'data' => $data,
+				'actions' => Action::whereParent($device)->get()
+			]);
 	}
 
 	public function create(Request $request) {

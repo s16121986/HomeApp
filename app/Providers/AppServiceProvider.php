@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Contracts\DomainServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider {
@@ -12,7 +13,8 @@ class AppServiceProvider extends ServiceProvider {
 	 * @return void
 	 */
 	public function register() {
-		//
+		if ($this->app->has(DomainServiceProvider::class))
+			$this->app->register($this->app->get(DomainServiceProvider::class));
 	}
 
 	/**

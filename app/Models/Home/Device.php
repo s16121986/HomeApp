@@ -92,6 +92,10 @@ class Device extends Model {
 		$builder->where('home_devices.default', 1);
 	}
 
+	public static function scopeWhereCanModbus(Builder $builder) {
+		$builder->whereRaw('(home_modules.address IS NOT NULL AND home_modules.address<>1)');
+	}
+
 	public static function scopeWhereIsLight(Builder $builder) {
 		$builder->where('home_devices.group', DeviceGroup::LIGHT);
 	}

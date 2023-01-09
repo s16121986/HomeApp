@@ -107,11 +107,12 @@ class Daemon {
 			if (!isset($this->devices[$pin]) || !static::isEventEnabled($this->devices[$pin]))
 				continue;
 
-			/*static::log(1, $event, $content, json_encode([
-				'address' => self::byte($content, 1),
-				'pin' => $pin,
-				'event' => $event
-			]));*/
+			if (env('LOG_SERIAL_PORT'))
+				static::log(1, $event, $content, json_encode([
+					'address' => self::byte($content, 1),
+					'pin' => $pin,
+					'event' => $event
+				]));/**/
 
 			self::deviceEvent($event, $this->devices[$pin]);
 		}

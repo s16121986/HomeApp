@@ -2,14 +2,7 @@
 
 namespace App\Http\Admin\Controllers;
 
-use App\Http\Admin\Actions\AbstractAction;
-use App\Http\Admin\Actions\CustomAction;
-use App\Http\Admin\Actions\DeleteAction;
-use App\Http\Admin\Actions\EditAction;
-use App\Http\Admin\Actions\IndexAction;
-use App\Http\Admin\Actions\SearchAction;
-use App\Http\Admin\Actions\ViewAction;
-use App\Services\Http\MetaService;
+use App\Http\Admin\Actions;
 use Illuminate\Support\Facades\View;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -20,23 +13,6 @@ class Controller extends BaseController {
 
 	use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-	public function __construct() {
-		/*MetaService::setDefaults([
-			'title' => 'Панель администратора'
-		]);*/
-
-		View::addLocation(resource_path('admin/views'));
-	}
-
-	public function __get($name) {
-		switch ($name) {
-			case 'meta':
-				return MetaService::instance();
-		}
-
-		return null;
-	}
-
 	public function callAction($method, $parameters) {
 		$callMethod = $method;// . 'Action';
 		if (!method_exists($this, $callMethod))
@@ -44,7 +20,7 @@ class Controller extends BaseController {
 
 		$response = call_user_func_array([$this, $callMethod], array_values($parameters));
 
-		if ($response instanceof AbstractAction)
+		if ($response instanceof Actions\AbstractAction)
 			return $response->layout();
 		else
 			return $response;
@@ -52,13 +28,10 @@ class Controller extends BaseController {
 
 	public function action($name = null, ...$args) {
 		$action = match ($name) {
-			'index' => new IndexAction($this),
-			'view' => new ViewAction($this),
-			'edit' => new EditAction($this),
-			'delete' => new DeleteAction($this),
-			'search' => new SearchAction($this),
-			'auth' => new AuthAction($this),
-			default => new CustomAction($this),
+			'index' => new Actions\IndexAction($this),
+			'edit' => new Actions\EditAction($this),
+			'delete' => new Actions\DeleteAction($this),
+			'search' => new Actions\SearchAction($this),
 		};
 
 		call_user_func_array([$action, 'run'], $args);
@@ -68,15 +41,6 @@ class Controller extends BaseController {
 
 	public function index() {
 		return redirect(route('device.index'));
-	}
-
-	public function layout($view, array $data = []) {
-		return view('layouts.default', [
-			'meta' => $this->meta->configure(array_merge([
-				'style' => 'main'
-			], $data)),
-			'content' => view($view, $data)
-		]);
 	}
 
 	public function redirect($url) {

@@ -49,6 +49,11 @@ require ROOT_PATH . '/vendor/autoload.php';
 
 $app = require_once ROOT_PATH . '/bootstrap/app.php';
 
+$app->instance(
+	App\Contracts\DomainServiceProvider::class,
+	App\Http\Site\Providers\BootServiceProvider::class
+);
+
 $kernel = $app->make(Kernel::class);
 $response = $kernel->handle(
 	$request = Request::capture()

@@ -12,11 +12,12 @@ class ScenarioController extends Controller {
 	public function index() {
 		$device = Device::find(22);
 		ButtonPressed::dispatch($device);
-		return $this->layout('scenario.index', [
-			'title' => 'Сценарии',
-			'script' => 'scenario/index',
-			'items' => Scenario::get()
-		]);
+		return app('layout')
+			->title('Сценарии')
+			->script('scenario/index')
+			->view('scenario.index', [
+				'items' => Scenario::get()
+			]);
 	}
 
 	public function edit(Request $request, $id) {

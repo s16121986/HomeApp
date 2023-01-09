@@ -53,4 +53,7 @@ Route::match(['get', 'post'], '/action/{id}/command', [$actionController, 'comma
 
 $crud('scenario', ROUTE_NAMESPACE . 'ScenarioController');
 
+Route::get('/settings/debug', [\App\Http\Admin\Controllers\SettingsController::class, 'debug']);
+Route::post('/debug/modbus', [\App\Http\Admin\Controllers\DebugController::class, 'modbus']);
+
 //$crud('command', ROUTE_NAMESPACE . 'ActionController');

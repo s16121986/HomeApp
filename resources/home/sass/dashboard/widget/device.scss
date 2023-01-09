@@ -1,5 +1,6 @@
 
 .widget-device {background-size: cover;background-repeat: no-repeat;}
+.widget-device .widget-wrap {min-height: 96px;}
 .widget-device .image {position: absolute;top: 0;left: 0;width: 32px;height: 32px;z-index: 1;border-radius: 50%;overflow: hidden;}
 /*.widget-device > .image:before {content: "";display: block;position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);z-index: 1;border-radius: 8px;}*/
 .widget-device .image i {font-size: 32px;color: #8E98AD;}

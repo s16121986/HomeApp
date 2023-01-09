@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace App\Http\Site\Providers;
 
 use App\Listeners\ArduinoEventSubscriber;
 use App\Listeners\HomeEventSubscriber;

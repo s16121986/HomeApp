@@ -96,7 +96,7 @@ abstract class AbstractAction {
 
 		//$this->menus();
 
-		return $this->controller->layout($view, array_merge($this->data, $data ?? []));
+		return app('layout')->view($view, array_merge($this->data, $data ?? []));
 	}
 
 }

@@ -2,6 +2,8 @@
 .activity-rooms .widget {min-height: 80px;flex-grow: 1;}
 .activity-rooms .widget:not(:last-child) {margin-bottom: 16px;}
 
+.widget-room .widget-wrap {min-height: 96px;}
+
 .sidebar-room:before {position: absolute;top: 0;left: 0;width: 100%;height: 144px;content: "";background-position: 50% 50%;background-size: cover;background-repeat: no-repeat;z-index: 1;}
 .sidebar-room:after {position: absolute;top: 0;left: 0;width: 100%;height: 144px;content: "";z-index: 2;background-color: rgba(0, 0, 0, .35);}
 .sidebar-room > .sidebar-header,

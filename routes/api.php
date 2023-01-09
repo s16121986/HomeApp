@@ -26,8 +26,8 @@ Route::prefix('oauth2')
 	});
 
 Route::prefix('yandex/{version}')
-	->where(['version' => 'v\d\.\d'])
-	->middleware([YandexAuth::class])
+	//->where(['version' => 'v\d\.\d'])
+	//->middleware([YandexAuth::class])
 	->group(function () {
 		$controller = YandexController::class;
 		Route::get('/', $controller . '@ping');
@@ -37,5 +37,9 @@ Route::prefix('yandex/{version}')
 		Route::post('/user/devices/action', $controller . '@state');
 		//	Route::get('/d', 'ping']);
 	});
+
+Route::get('/{path}', function ($path) {
+	dd($path);
+});
 
 Route::get('/test', YandexController::class . '@test');

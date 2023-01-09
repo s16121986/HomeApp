@@ -10,12 +10,13 @@ use Illuminate\Http\Request;
 class ModuleController extends Controller {
 
 	public function index() {
-		return $this->layout('module.index', [
-			'title' => 'Модули управления',
-			'script' => 'module/index',
-			'rooms' => HomeRepository::rooms(),
-			'modules' => Module::orderBy('name')->get()
-		]);
+		return app('layout')
+			->title('Модули управления')
+			->script('module/index')
+			->view('module.index', [
+				'rooms' => HomeRepository::rooms(),
+				'modules' => Module::orderBy('name')->get()
+			]);
 	}
 
 	public function edit(Request $request, $id) {

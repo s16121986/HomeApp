@@ -4,18 +4,28 @@ define('LARAVEL_START', microtime(true));
 define('ROOT_PATH', realpath(__DIR__ . '/../../'));
 const APP_SCRIPT = 'daemon-arduino';
 
+use App\Daemon\Kernel;
+use App\Daemon\Arduino\Daemon;
+
 require ROOT_PATH . '/vendor/autoload.php';
 
 $app = require_once ROOT_PATH . '/bootstrap/app.php';
 
-use App\Daemon\Kernel;
-use App\Daemon\Arduino\Daemon;
+$app->instance(
+	App\Contracts\DomainServiceProvider::class,
+	App\Http\Console\Providers\BootServiceProvider::class
+);
 
 $kernel = new Kernel($app);
 $kernel->bootstrap();
 
 $daemon = new Daemon('/dev/arduino');
-$daemon->run();
+try {
+	$daemon->run();
+} catch (Exception $e) {
+	sleep(10);
+}
+
 
 
 

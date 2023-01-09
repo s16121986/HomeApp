@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace App\Http\Site\Providers;
 
 use App\Broadcaster\Notifier\Notifier;
 use Illuminate\Support\Facades\Broadcast;

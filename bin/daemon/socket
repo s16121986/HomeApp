@@ -13,6 +13,11 @@ use App\Listeners\WebSocketEventSubscriber;
 
 $app = require_once ROOT_PATH . '/bootstrap/app.php';
 
+$app->instance(
+	App\Contracts\DomainServiceProvider::class,
+	App\Http\Console\Providers\BootServiceProvider::class
+);
+
 $service = new Kernel($app);
 $service->handle();
 

@@ -13,6 +13,7 @@ class YandexController extends Controller {
 	//v1.0\/user\/devices\/
 
 	public function ping() {
+		dd(233);
 		return [];
 	}
 
