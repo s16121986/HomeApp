@@ -24,7 +24,6 @@ try {
 	$daemon->run();
 } catch (Exception $e) {
 	sleep(10);
-
 }
 
 
