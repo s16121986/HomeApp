@@ -50,3 +50,18 @@ header button svg {width: 16px;height: 16px;vertical-align: top;}
 div.activities-wrap {flex-grow: 1;}
 .activity {height: 100%;}
 
+@media (prefers-color-scheme: dark) {
+  body {background: #1D2125;color:#9FADBC;}
+  .widget-wrap {background-color: #282d33;box-shadow:none;}
+  .widget:hover .widget-wrap {background-color: #333c43;}
+  .widget-device div.name{color:#8C9BAB;}
+
+  nav.main-menu{background-color: #282d33;}
+  nav.main-menu div:not(.current) svg{color:#fff;}
+
+  div.activity-settings div.widget-toggle{color: inherit;}
+
+  .sidebar{background-color: #1D2125;}
+  .home-tabs .tab{background-color: transparent;}
+}
+
